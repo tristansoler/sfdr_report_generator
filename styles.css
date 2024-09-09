@@ -1,0 +1,137 @@
+/* Define basic styles for the page layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.page-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 140pt; /* Left margin of 140 points */
+    padding-top: 20px; /* Adjust for PDF-like vertical spacing */
+}
+
+.content {
+    max-width: 785pt; /* Ensure the content does not go beyond this point */
+    padding-right: 20px; /* Optional: small padding on the right for extra spacing */
+}
+
+/* Adjust heading font styles to be more similar to the PDF */
+.main-heading {
+    font-size: 10pt;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.product-name,
+.legal-id,
+.legal-text {
+    font-size: 9.5pt; /* Matching the PDF font size more closely */
+    line-height: 1.6;
+}
+
+/* Adjust the spacing between different blocks of text */
+.legal-text {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.subheading h2 {
+    color: #008000; /* A close match for the green text in the PDF */
+    font-size: 14pt; /* Slightly larger for the title */
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Orange Box */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.header {
+    background-color: #FFDAB9;
+    padding: 20px;
+}
+
+.header h2 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+}
+
+.dots {
+    display: flex;
+    margin-right: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+
+.dot.green {
+    background-color: #32CD32;
+}
+
+.dot.white {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    background-color: white;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.body {
+    background-color: #FFE4B5;
+    padding: 20px;
+}
+
+.columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    font-size: 14px;
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.sub-item {
+    margin-left: 28px;
+}
+
+strong {
+    font-weight: bold;
+}

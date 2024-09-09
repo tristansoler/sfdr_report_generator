@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inversión Sostenible</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #FFDAB9;
+            padding: 20px;
+        }
+        .header h2 {
+            margin: 0 0 20px 0;
+            font-size: 20px;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+        }
+        .dots {
+            display: flex;
+            margin-right: 8px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 2px;
+        }
+        .dot.green {
+            background-color: #32CD32;
+        }
+        .dot.white {
+            background-color: white;
+            border: 1px solid black;
+        }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            background-color: white;
+            margin-right: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .body {
+            background-color: #FFE4B5;
+            padding: 20px;
+        }
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            font-size: 14px;
+        }
+        .item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .sub-item {
+            margin-left: 28px;
+        }
+        strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>¿Este producto financiero tenía un objetivo de inversión sostenible?</h2>
+            <div class="options">
+                <div class="option">
+                    <div class="dots">
+                        <div class="dot green"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="checkbox"></div>
+                    <span>Sí</span>
+                </div>
+                <div class="option">
+                    <div class="dots">
+                        <div class="dot green"></div>
+                        <div class="dot white"></div>
+                    </div>
+                    <div class="checkbox">X</div>
+                    <span>No</span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="columns">
+                <div>
+                    <div class="item">
+                        <div class="checkbox"></div>
+                        <span><strong>Realizó inversiones sostenibles con un objetivo medioambiental:</strong></span>
+                    </div>
+                    <div class="item sub-item">
+                        <div class="checkbox"></div>
+                        <span>en actividades económicas que se consideran medioambientalmente sostenibles con arreglo a la taxonomía de la UE</span>
+                    </div>
+                    <div class="item sub-item">
+                        <div class="checkbox"></div>
+                        <span>en actividades económicas que no se consideran medioambientalmente sostenibles con arreglo a la taxonomía de la UE</span>
+                    </div>
+                    <div class="item">
+                        <div class="checkbox"></div>
+                        <span><strong>Realizó inversiones sostenibles con un objetivo social:</strong></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="item">
+                        <div class="checkbox">X</div>
+                        <span><strong>Promovió características medioambientales o sociales</strong> y, aunque no tenía como objetivo una inversión sostenible, tuvo un porcentaje del 4,12% de inversiones sostenibles</span>
+                    </div>
+                    <div class="item sub-item">
+                        <div class="checkbox"></div>
+                        <span>con un objetivo medioambiental en actividades económicas que se consideran medioambientalmente sostenibles con arreglo a la taxonomía de la UE</span>
+                    </div>
+                    <div class="item sub-item">
+                        <div class="checkbox">X</div>
+                        <span>con un objetivo medioambiental en actividades económicas que no se consideran medioambientalmente sostenibles con arreglo a la taxonomía de la UE</span>
+                    </div>
+                    <div class="item sub-item">
+                        <div class="checkbox">X</div>
+                        <span>con un objetivo social</span>
+                    </div>
+                    <div class="item">
+                        <div class="checkbox"></div>
+                        <span><strong>Promovió características medioambientales o sociales</strong>, pero no realizó ninguna inversión sostenible</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
