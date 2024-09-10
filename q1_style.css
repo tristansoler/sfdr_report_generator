@@ -1,0 +1,68 @@
+/* Define basic styles for the page layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.page-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 140pt; /* Left margin of 140 points */
+    padding-top: 20px; /* Adjust for PDF-like vertical spacing */
+}
+
+.content {
+    max-width: 785pt; /* Ensure the content does not go beyond this point */
+    padding-right: 20px; /* Optional: small padding on the right for extra spacing */
+}
+
+/* question 1 patr 1 style*/
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* question 1 patr 2 style*/
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 0;
+    padding: 15pt;
+    font-size: 10pt;
+}
+.container {
+    position: relative;
+    width: 595pt; /* Typical A4 width in points */
+
+
+/* question 1 patr 3 style*/
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4;
+    margin: 0;
+    padding: 15pt;
+}
+.container {
+    max-width: 595pt;
+    margin: 0 auto;
+}
+.content {
+    margin-left: 140pt;
+}
+
+
+
+
+
+/* question 1 patr 4 style*/
