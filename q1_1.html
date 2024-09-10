@@ -7,43 +7,60 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-size: 10pt;
+            line-height: 1.4; /*alternative 1.6 */
             margin: 0;
-            padding: 20px;
+            padding: 15pt;
+            font-size: 10pt;
+            padding: 15pt; /* alternative 20 */
         }
+        /* continer */
         .container {
-            max-width: 800px;
+            position: relative;
+            width: 595pt; /* Typical A4 width in points */
+            /*max-width: 800px;  Alternative in question 1 part 1*/ 
             margin: 0 auto;
         }
-        .question {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
+        /* content */
+        .content {
+            margin-left: 140pt;
         }
+/* style of the question */
         .icon {
             width: 60px;
             height: 60px;
-            margin-right: 20px;
+            margin-right: 0px;
+            position: absolute;
+            margin-left: 85pt;
         }
-        .text {
-            margin-left: 140px;
+        .main-question {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0px;
+            margin-left: 140pt;
         }
-        h1 {
+        h1 { /*this is part of the main question*/
             font-size: 18px;
             margin-top: 0;
         }
-        ul {
-            padding-left: 20px;
+/* style of the answer */
+        .text_answer {
+            margin-left: 140pt;
+        }
+        ul { /* we include this as part of the answer when we have an unordered list*/
+            padding-left: 15pt; /*alternative in q1_part1 20px*/
+            margin-top: 0;
+            margin-bottom: 10pt; 
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="question">
-            <img src="logos_icons/icon_q1.jpg" alt="Icono de pregunta" class="icon">
+        <img src="logos_icons/icon_q1.jpg" alt="Icono de pregunta" class="icon">
+        <div class="main-question">
             <h1>¿En qué grado se cumplieron las características medioambientales o sociales que promueve este producto financiero?</h1>
         </div>
-        <div class="text">
+        <div class="text_answer">
             <p>El Plan de Previsión ha promovido características medioambientales y sociales evaluando sus inversiones subyacentes en función de criterios ambientales, sociales y de gobernanza (ASG) utilizando una metodología ASG propia e invirtiendo en emisores que exhiban prácticas ASG sólidas y cumplan con los factores de exclusión descritos en la estrategia de inversión recogida en el anexo de Sostenibilidad de la información precontractual de este Plan de Previsión.</p>
             <p>En este sentido, se han utilizado elementos financieros, ambientales, sociales y de buen gobierno para obtener una visión más completa de los activos subyacentes en los que el Plan de Previsión invirtió durante el período de referencia, habiendo evaluado una combinación de factores ASG que incluyeron, pero no se limitaron a:</p>
             <ul>
