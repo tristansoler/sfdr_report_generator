@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Replica - Sustainability Indicators</title>
+    <title>Question1Part2</title>
     <style>
+
+        .page-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 140pt; /* Left margin of 140 points */
+            padding-top: 20px; /* Adjust for PDF-like vertical spacing */
+        }
+
         body {
             font-family: Arial, sans-serif;
             line-height: 1.4;
             margin: 0;
-            padding: 15pt;
+            padding: 0pt;
             font-size: 10pt;
         }
         .container {
             position: relative;
             width: 595pt; /* Typical A4 width in points */
+            max-width: 785pt;
         }
         .gray-boxes {
             position: absolute;
@@ -33,12 +43,22 @@
             margin-left: 140pt;
             padding-left: 5pt;
         }
+        .sub-question::before {
+            content: "";
+            width: 8pt;
+            height: 8pt;
+            background-color: #999;
+            border-radius: 50%;
+            position: absolute;
+            left: 130pt;
+            top: 3pt;
+        }
         .sub-qtext {
             font-size: 11pt;
             font-style: italic;
             font-weight: bold;
             margin-top: 0;
-            margin-bottom: 5pt;
+            margin-bottom: 0pt;
         }
         ul {
             padding-left: 15pt;
@@ -60,8 +80,10 @@
             </div>
         </div>
         <div class="sub-question">
-            <dev class="sub-qtext">¿Cómo se han comportado los indicadores de sostenibilidad?</dev >
-            <p>A continuación, se describe el comportamiento de los indicadores de sostenibilidad del Plan de Previsión a lo largo del periodo de referencia:</p>
+            <div class="sub-qtext">¿Cómo se han comportado los indicadores de sostenibilidad?</div >
+            <p>
+                A continuación, se describe el comportamiento de los indicadores de sostenibilidad del Plan de Previsión a lo largo del periodo de referencia:
+            </p>
             <ul>
                 <li><strong>Indicador de exclusiones:</strong> El Plan de Previsión no ha realizado ninguna inversión en sectores no permitidos por la política de inversión del mismo de acuerdo con el procedimiento interno de la Entidad contratada para la gestión de activos de la EPSV. Es decir, el Plan de Previsión no tuvo exposición a emisores cuyo negocio está mayoritariamente orientado a actividades relacionadas con el armamento controvertido, así como los combustibles fósiles no convencionales y la generación eléctrica a partir del carbón y minería de carbón. Adicionalmente, para el caso de la renta fija pública, el Plan de Previsión no ha tenido exposición a países con un desempeño deficiente en términos de derechos políticos y libertades sociales.</li>
                 <li><strong>Indicador de controversias:</strong> El Plan de Previsión ha tenido una exposición del 0% a emisores involucrados en controversias consideradas críticas.</li>
