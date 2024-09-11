@@ -65,7 +65,7 @@ body {
 /* Sub-question Format */
 .sub-question {
     position: relative;
-    padding-left: 15pt;
+    padding-left: 0pt;
     margin-bottom: 15pt;
 }
 
@@ -76,7 +76,7 @@ body {
     background-color: #999;
     border-radius: 50%;
     position: absolute;
-    left: 0;
+    left: -20pt;
     top: 3pt;
 }
 
@@ -93,6 +93,7 @@ body {
     font-style: italic;
     margin-top: 15pt;
     margin-bottom: 10pt;
+    /*margin-left: 40pt;*/
 }
 
 /* List Format */
