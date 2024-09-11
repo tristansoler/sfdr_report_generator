@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Sostenibilidad</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 896px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .container {
+            position: relative;
+        }
+        .left-sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 33.333%;
+            padding-right: 1rem;
+            background-color: #f3f4f6;
+            padding: 1rem;
+            font-size: 0.875rem;
+        }
+        .left-sidebar p {
+            margin-bottom: 1rem;
+        }
+        .left-sidebar ul {
+            padding-left: 1.25rem;
+            list-style-type: disc;
+        }
+        .left-sidebar li {
+            margin-bottom: 0.5rem;
+        }
+        .main-content {
+            margin-left: 35%;
+        }
+        .question-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .question-icon {
+            width: 40px;
+            height: 40px;
+            margin-top: 0.25rem;
+        }
+        h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.25rem;
+        }
+        .sub-question {
+            padding-left: 3.5rem;
+        }
+        h3 {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-group {
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nested-checkboxes {
+            padding-left: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .footnote {
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-sidebar">
+            <p><strong>Las actividades facilitadoras</strong> permiten de forma directa que otras actividades contribuyan significativamente a un objetivo medioambiental.</p>
+            <p><strong>Las actividades de transición</strong> son actividades para las que todavía no se dispone de alternativas con bajas emisiones de carbono y que, entre otras cosas, tienen niveles de emisión de gases de efecto invernadero que se corresponden con los mejores resultados.</p>
+            <p><strong>Las actividades que se ajustan a la taxonomía</strong> se expresan como un porcentaje de:</p>
+            <ul>
+                <li><strong>El volumen de negocios</strong>, que refleja el porcentaje de ingresos procedentes de actividades ecológicas de las empresas en las que se invierte.</li>
+                <li><strong>La inversión en activo fijo</strong> (CapEx), que muestra las inversiones ecológicas realizadas por las empresas en las que se invierte, por ejemplo, para la transición a una economía verde.</li>
+                <li><strong>Los gastos de explotación</strong> (OpEx), que reflejan las actividades operativas ecológicas de las empresas en las que se invierte.</li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="question-container">
+                <img src="/logos_icons/icon_q5.png" alt="Question icon" class="question-icon">
+                <div>
+                    <h2>¿En qué medida se ajustaban las inversiones sostenibles con un objetivo medioambiental a la taxonomía de la UE?</h2>
+                    <textarea rows="4"></textarea>
+                </div>
+            </div>
+
+            <div class="sub-question">
+                <h3>¿Invirtió el producto financiero en actividades relacionadas con el gas fósil o la energía nuclear que cumplían la taxonomía de la UE1?</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox">
+                        <span>Sí:</span>
+                    </label>
+                    <div class="nested-checkboxes">
+                        <label>
+                            <input type="checkbox">
+                            <span>En el gas fósil</span>
+                        </label>
+                        <label>
+                            <input type="checkbox">
+                            <span>En la energía nuclear</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox">
+                        <span>No</span>
+                    </label>
+                </div>
+                <p class="footnote">
+                    1Las actividades relacionadas con el gas fósil o la energía nuclear solo cumplirán la taxonomía de la UE cuando contribuyan a limitar el cambio climático («mitigación del cambio climático») y no perjudiquen significativamente ningún objetivo de la taxonomía de la UE (véase la nota explicativa en el margen izquierdo). Los criterios completos aplicables a las actividades económicas relacionadas con el gas fósil y la energía nuclear que cumplen la taxonomía de la UE se establecen en el Reglamento Delegado (UE) 2022/1214 de la Comisión.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
