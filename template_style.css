@@ -1,0 +1,263 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4;
+    margin: 0;
+    padding: 15pt;
+    margin-right: 40pt;
+    margin-bottom: 72pt;
+    page-break-inside: auto;
+    page-break-after: auto;
+    page-break-before: auto;
+    orphans: 4;
+    background-color: white;
+}
+
+/* Logo style */
+.logo-container {
+    position: absolute;
+    top: 15pt;
+    left: 15pt;
+    width: 100pt;
+    height: auto;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+.page-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 140pt;
+    padding-right: 40pt;
+    padding-top: 20px;
+}
+
+.content {
+    width: 100%;
+    max-width: 785pt;
+    padding-right: 40pt;
+}
+
+/* Heading styles */
+.heading {
+    max-width: calc(100% - 50pt);
+    padding-right: 45pt;
+    box-sizing: border-box;
+    text-align: justify;
+}
+
+.heading p {
+    margin: 0 0 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.main-heading,
+.product-name,
+.legal-id,
+.legal-text {
+    font-size: 11pt;
+    line-height: 1.6;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+.main-heading {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+/* Subheading styles */
+.subheading h2 {
+    color: #05b405;
+    font-size: 18pt;
+    font-weight: lighter;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 0;
+    margin-left: 30pt;
+}
+
+/* Container styles */
+.container {
+    max-width: 450pt;
+    margin: 0;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Gray box styles */
+.gray-boxes {
+    position: absolute;
+    text-align: left;
+    left: 10pt;
+    width: 100pt;
+}
+
+.gray-box {
+    background-color: rgb(223, 222, 222);
+    padding: 0pt;
+    margin-bottom: 10pt;
+    font-size: 8pt;
+    line-height: 1.3;
+}
+
+/* Orange Box styles */
+.ob-header {
+    background-color: #FFDAB9;
+    padding: 20px;
+}
+
+.ob-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 12pt;
+    justify-content: left;
+}
+
+.ob-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ob-option {
+    display: flex;
+    align-items: center;
+}
+
+.ob-dots {
+    display: flex;
+    margin-right: 8px;
+}
+
+.ob-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+
+.ob-dot.green {
+    background-color: #32CD32;
+    border: 1px #32CD32;
+}
+
+.ob-dot.white {
+    background-color: white;
+}
+
+.ob-checkbox {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    background-color: white;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.ob-body {
+    background-color: #FFE4B5;
+    padding: 20px;
+}
+
+.ob-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    font-size: 11px;
+}
+
+.ob-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.ob-item-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 11pt;
+}
+
+.ob-sub-item {
+    margin-left: 28px;
+}
+
+/* Question styles */
+
+.main-question-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5pt;
+}
+
+.question-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 15pt;
+    /* let's move icon to the left few points*/
+    margin-left: -65pt;
+}
+
+.main-question {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 10pt; /* Adjust this value to align the text vertically with the icon */
+}
+
+.sub-question {
+    position: relative;
+    padding-left: 0pt;
+    margin-bottom: 15pt;
+}
+
+.sub-question::before {
+    content: "";
+    width: 8pt;
+    height: 8pt;
+    background-color: #999;
+    border-radius: 50%;
+    position: absolute;
+    left: -20pt;
+    top: 3pt;
+}
+
+.sub-qtext {
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 5pt;
+}
+
+.sub-sub-question {
+    font-style: italic;
+    margin-top: 15pt;
+    margin-bottom: 10pt;
+}
+
+/* List styles */
+ul {
+    padding-left: 15pt;
+    margin-top: 0;
+    margin-bottom: 10pt;
+}
+
+li {
+    margin-bottom: 5pt;
+}
+
+strong {
+    font-weight: bold;
+}
