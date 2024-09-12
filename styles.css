@@ -4,6 +4,28 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
+    line-height: 1.4;
+    padding: 15pt;
+    margin-right: 40pt;
+    margin-bottom: 72pt;
+    page-break-inside: auto;
+    page-break-after: auto;
+    page-break-before: auto;
+    orphans: 4;
+}
+
+/* Logo style */
+.logo-container {
+    position: absolute;
+    top: 15pt;
+    left: 15pt;
+    width: 100pt; /* Adjust based on your logo's dimensions */
+    height: auto;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
 }
 
 .page-container {
@@ -11,95 +33,134 @@ body {
     display: flex;
     justify-content: flex-start;
     padding-left: 140pt; /* Left margin of 140 points */
+    padding-right: 40pt;
     padding-top: 20px; /* Adjust for PDF-like vertical spacing */
 }
 
 .content {
+    width: 100%;
     max-width: 785pt; /* Ensure the content does not go beyond this point */
-    padding-right: 20px; /* Optional: small padding on the right for extra spacing */
+    padding-right: 40pt; /* Optional: small padding on the right for extra spacing */
 }
 
-/* Adjust heading font styles to be more similar to the PDF */
-.main-heading {
-    font-size: 10pt;
-    font-weight: bold;
-    line-height: 1.6;
+/*Report Heading*/
+.heading {
+    max-width: calc(100% - 50pt); /* Subtracts 40pt from the full width */
+    padding-right: 45pt;
+    box-sizing: border-box;
+    text-align: justify; /*let's justify the text*/
 }
 
+.heading p {
+    margin: 0 0 10px 0; /* Adds some space between paragraphs */
+    word-wrap: break-word; /* Ensures long words don't overflow */
+    overflow-wrap: break-word;
+}
+
+.main-heading,
 .product-name,
 .legal-id,
 .legal-text {
-    font-size: 9.5pt; /* Matching the PDF font size more closely */
+    font-size: 11pt;
     line-height: 1.6;
+    max-width: 100%; /* Ensures text doesn't exceed the parent container */
+    
+    overflow-wrap: break-word; /* Let's wrap the text*/
 }
 
-/* Adjust the spacing between different blocks of text */
-.legal-text {
-    margin-top: 10px;
-    margin-bottom: 20px;
+.main-heading {
+    font-size: 12pt;
+    font-weight: bold;
 }
+
+/* Green Subheading*/
 
 .subheading h2 {
-    color: #008000; /* A close match for the green text in the PDF */
-    font-size: 14pt; /* Slightly larger for the title */
-    font-weight: bold;
+    color: #05b405; /* A close match for the green text in the PDF */
+    font-size: 18pt; /* Slightly larger for the title */
+    font-weight: lighter;
     margin-top: 10px;
     margin-bottom: 30px;
+    padding-left: 0;
+    margin-left: 30pt;
 }
 
-/* Orange Box */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 450pt;
+    margin: 0;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.header {
+
+/*BELOW INTRO GRAY CLASSES STYLES*/
+
+/*End Gray Boxes Classes Style*/
+
+/* Grey box Format */
+.gray-boxes {
+    position: absolute;
+    text-align: left;
+    left: 10pt;
+    width: 100pt; /* 118pt - 10pt */
+}
+
+.gray-box {
+    background-color: rgb(223, 222, 222);
+    padding: 0pt;
+    margin-bottom: 10pt;
+    font-size: 8pt;
+    line-height: 1.3;
+}
+
+/* Orange Box Classes */
+.ob-header {
     background-color: #FFDAB9;
     padding: 20px;
 }
 
-.header h2 {
-    margin: 0 0 20px 0;
-    font-size: 20px;
+.ob-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 12pt;
+    justify-content: left;
 }
 
-.options {
+.ob-options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 64px;
+    gap: 20px;
 }
 
-.option {
+.ob-option {
     display: flex;
     align-items: center;
 }
 
-.dots {
+.ob-dots {
     display: flex;
     margin-right: 8px;
 }
 
-.dot {
+.ob-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     margin-right: 2px;
 }
 
-.dot.green {
+.ob-dot.green {
     background-color: #32CD32;
+    border: 1px #32CD32;
 }
 
-.dot.white {
+.ob-dot.white {
     background-color: white;
-    border: 1px solid black;
 }
 
-.checkbox {
-    width: 20px;
-    height: 20px;
+.ob-checkbox {
+    width: 15px;
+    height: 15px;
     border: 1px solid black;
     background-color: white;
     margin-right: 8px;
@@ -110,25 +171,32 @@ body {
     flex-shrink: 0;
 }
 
-.body {
+.ob-body {
     background-color: #FFE4B5;
     padding: 20px;
 }
 
-.columns {
+.ob-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    font-size: 14px;
+    font-size: 11px;
 }
 
-.item {
+.ob-item {
     display: flex;
     align-items: flex-start;
     margin-bottom: 8px;
+    flex-wrap: wrap;
 }
 
-.sub-item {
+.ob-item-text {
+    flex: 1;
+    min-width: 0;
+    font-size: 11pt;
+}
+
+.ob-sub-item {
     margin-left: 28px;
 }
 

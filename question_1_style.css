@@ -18,7 +18,7 @@ body {
   text-align: justify;
   overflow: hidden;
   margin: 0 auto;
-  padding-right: 0pt;
+  max-width: 785pt;
 
 }
 
@@ -34,7 +34,7 @@ body {
 /* Main Question Format */
 .main-question {
     margin-left: 140pt;
-    font-size: 18px;
+    font-size: 12pt;
     font-weight: bold;
     margin-bottom: 20pt;
 }
@@ -43,7 +43,7 @@ body {
 .content {
     margin-left: 140pt;
     margin-right: 10pt;
-    width: 635pt; /* 785pt - 140pt - 10pt */
+    width: auto; /* 785pt - 140pt - 10pt */
 }
 
 /* Grey box Format */
@@ -81,7 +81,7 @@ body {
 }
 
 .sub-qtext {
-    font-size: 11pt;
+    font-size: 10pt;
     font-style: italic;
     font-weight: bold;
     margin-top: 0;
