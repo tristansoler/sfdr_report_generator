@@ -37,12 +37,6 @@ body {
     padding-top: 20px;
 }
 
-.content {
-    width: 100%;
-    max-width: 785pt;
-    padding-right: 40pt;
-}
-
 /* Heading styles */
 .heading {
     max-width: calc(100% - 50pt);
@@ -110,13 +104,13 @@ body {
 /* Orange Box styles */
 .ob-header {
     background-color: #FFDAB9;
-    padding: 20px;
+    padding: 5px;
 }
 
 .ob-header h2 {
     margin: 0 0 10px 0;
     font-size: 12pt;
-    justify-content: left;
+    justify-content: center;
 }
 
 .ob-options {
@@ -200,6 +194,12 @@ body {
     display: flex;
     align-items: flex-start;
     margin-bottom: 5pt;
+    margin-right: 50pt;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
+
 }
 
 .question-icon {
@@ -247,6 +247,19 @@ body {
     margin-bottom: 10pt;
 }
 
+/* Answer & Main Text Styles */
+.answer-text {
+    width: 100%;
+    max-width: 785pt;
+    margin-right: 60pt;
+    padding-right: 40pt;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
+
+}
+
 /* List styles */
 ul {
     padding-left: 15pt;
@@ -260,4 +273,32 @@ li {
 
 strong {
     font-weight: bold;
+}
+
+/* regular orange box styles */
+.obr-container {
+    background-color: #FFE4B5;
+    max-width: 640pt;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 7pt;
+    margin-bottom: 5pt;
+    margin-right: 40pt;
+}
+.obr-content {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    text-align: justify;
+    align-items: center;
+    margin: 0;
+    font-size: 10pt;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 0.5px;
+    padding-top: 0.5px;
+}
+.p {
+    margin-bottom: 0px;
+}
+.italic {
+    font-style: italic;
 }
