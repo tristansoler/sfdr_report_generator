@@ -1,0 +1,41 @@
+:root {
+    --col1-width: 30%;
+    --col2-width: 40%;
+    --col3-width: 15%;
+    --col4-width: 15%;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.2;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+th, td {
+    padding: 2px 4px;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+th {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+td:first-child {
+    border-right: 1px solid black;
+}
+.col1 { width: var(--col1-width); }
+.col2 { width: var(--col2-width); }
+.col3 { width: var(--col3-width); }
+.col4 { width: var(--col4-width); }
+.percent {
+    text-align: right;
+}
+.country {
+    text-align: center;
+}
