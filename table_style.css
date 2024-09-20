@@ -1,40 +1,56 @@
+/*TABLE STYLES*/
 :root {
-    --col1-width: 30%;
+    --col1-width: 40%;
     --col2-width: 40%;
-    --col3-width: 15%;
-    --col4-width: 15%;
+    --col3-width: 10%;
+    --col4-width: 10%;
 }
-body {
+.table-body {
     font-family: Arial, sans-serif;
     font-size: 11px;
     line-height: 1.2;
+    max-width: 618pt; /*max width of the whole table equal to 758pt - 140pt*/
+    
 }
 table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
 }
-th, td {
-    padding: 2px 4px;
-    text-align: left;
+td {
+    padding-bottom: 2px;
+    padding-left: 2px;
     vertical-align: top;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 th {
-    background-color: #e6e6e6;
+    background-color: white;
     font-weight: bold;
-    border-bottom: 1px solid black;
+    border-bottom: 0.1px solid black;
+    text-align: left;
+    vertical-align: top;
 }
 td:first-child {
-    border-right: 1px solid black;
+    border-right: 0.1px solid black;
 }
+
+/* column width*/
 .col1 { width: var(--col1-width); }
 .col2 { width: var(--col2-width); }
 .col3 { width: var(--col3-width); }
 .col4 { width: var(--col4-width); }
+
+
+/* Table Datapoints Style */
+.key-invest {
+    text-align: left;
+}
+.sector {
+    text-align: left;
+}
 .percent {
-    text-align: right;
+    text-align: center;
 }
 .country {
     text-align: center;
