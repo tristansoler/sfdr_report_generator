@@ -246,7 +246,6 @@ body {
     margin-top: 15pt;
     margin-bottom: 10pt;
 }
-
 /* Answer & Main Text Styles */
 .answer-text {
     width: 100%;
@@ -259,7 +258,6 @@ body {
     text-align: justify;
 
 }
-
 /* List styles */
 ul {
     padding-left: 15pt;
@@ -291,8 +289,8 @@ strong {
     align-items: center;
     margin: 0;
     font-size: 10pt;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 0.5px;
     padding-top: 0.5px;
 }
