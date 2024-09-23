@@ -33,11 +33,18 @@
     margin: 10px 0; /* Adjust margins */
     position: relative;
     font-family: Arial, sans-serif;
+    text-align: center; /*align text center*/
+    /* limit max width of the nodes */
+    max-width: 130px;
+    
 }
 
 /*id styling */
 #n10000 {
-    background-color: #bdbdbd;
+    background-color: #dddbdb;
+    /*add more padding 10 top 11 bottom 5 left and right */
+    padding: 20px 5px 20px 5px;
+    max-width: 200px;
 }
 /* Styling for Level 1 */
 #n11000 {
@@ -45,7 +52,7 @@
     background-color: #40a13e;
 } 
 #n12000 {
-    background-color: #bdbdbd;
+    background-color: #dddbdb;
 }
 /* Styling for Level 2 */
 #n11100 {
@@ -57,7 +64,7 @@
 }
 /* Styling for Level 3 */
 #n11110, #n11120 {
-    background-color: #006400;
+    background-color: #028d02;
 }
 #n11120 {
     background-color: #6495ed;
