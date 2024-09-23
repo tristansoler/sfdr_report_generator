@@ -559,7 +559,7 @@
                     ¿Cuál ha sido la asignación de activos?
                 </div>
             </div>
-            <!--Answer 4 -->
+            <!--Answer Subquestion 4 -->
             <div class="answer-text">
                 <p>
                     El Plan de Previsión ha cumplido con la asignación de activos prevista en la
@@ -587,6 +587,55 @@
                     sostenible teniendo en cuenta los datos del último día hábil de cada trimestre del
                     período de referencia.
                 </p>
+            </div>
+            <!--Regular orange box 2-->
+            <div class="obr-container">
+            <!--Flow Chart-->
+            <div class="flowchart">
+                <svg class="flowchart-lines"></svg>
+                <div class="nodes">
+                    <div class="node" id="n10000">Inversiones</div>
+                    <div class="branch-horizontal">
+                        <div class="node" id="n11000" data-parent="n10000">n.º 1 Ajustadas a características medioambientales o sociales</div>
+                        <div class="node" id="n12000" data-parent="n10000">n.º 2 Otras</div>
+                    </div>
+                    <div class="branch-horizontal">
+                        <div class="node" id="n11100" data-parent="n11000">n.º 1A Sostenibles</div>
+                        <div class="node" id="n11200" data-parent="n11000">n.º 1B Otras características medioambientales o sociales</div>
+                    </div>
+                    <div class="sub-branch-horizontal">
+                        <div class="node" id="n11110" data-parent="n11100">Otras medioambientales</div>
+                        <div class="node" id="n11120" data-parent="n11100">Sociales</div>
+                    </div>
+                </div>
+            </div>
+            <script src="flowchart-script.js"></script>
+
+            <!--Rest of the orange box content-->
+                <div class="obr-content">
+                    <p>
+                        <strong>La categoria n. º1 Ajustadas a características medioambientales o sociales </strong> 
+                        incluye las inversiones del producto financiero utilizadas para lograr las
+                        características medioambientales o sociales que promueve el producto financiero.
+                    </p>
+                    <p> 
+                        <strong>La categoria n.º 2 Otras </strong>  incluye el resto de inversiones del producto financiero
+                        que ni se ajustan a las características medioambientales o sociales ni pueden
+                        considerarse inversiones sostenibles.
+                    </p>
+                    <p>
+                        La categoría <strong>n.º 1 Ajustadas a características medioambientales o sociales</strong> abarca:
+                    </p>
+                    <p>
+                        — La subcategoría n.º 1A Sostenibles, que incluye las inversiones
+                        medioambiental y socialmente sostenibles.
+                    </p>
+                    <p style="margin-top: -10px;">
+                        — La subcategoría n.º 1B Otras características medioambientales o sociales,
+                        que abarca inversiones ajustadas a las características medioambientales o
+                        sociales que no se consideran inversiones sostenibles.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
