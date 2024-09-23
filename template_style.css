@@ -334,12 +334,12 @@ td {
 th {
     background-color: white;
     font-weight: bold;
-    border-bottom: 0.1px solid black;
+    border-bottom: 0.01px solid;
     text-align: left;
     vertical-align: top;
 }
 td:first-child {
-    border-right: 0.1px solid black;
+    border-right: 0.01px solid;
     text-align: left;
 }
 
@@ -348,6 +348,12 @@ td:nth-child(1), td:nth-child(2) {
     padding-right: 40px;
     text-align: left;
 }
+
+/*add 5px left padding to second column*/
+td:nth-child(2) {
+    padding-left: 5px;
+}
+
 /* column width*/
 .col1 { width: var(--col1-width); }
 .col2 { width: var(--col2-width); }
@@ -437,4 +443,23 @@ td:nth-child(1), td:nth-child(2) {
 }
 .flowchart #n11120 {
     background-color: #6495ed;
+}
+
+/*STYLES FOR CHECKBOX QUESTION 5*/
+.q5-checkbox-group {
+    margin-bottom: 0.5rem;
+}
+.q5-checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.q5-nested-checkboxes {
+    padding-left: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+/*FOOT NOTE STYle*/
+.footnote {
+
 }
