@@ -15,20 +15,22 @@
 
 .nodes {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Changed from column to row */
     align-items: center;
 }
 
 .branch-horizontal, .sub-branch-horizontal {
     display: flex;
+    flex-direction: column; /* Changed to column for vertical layout */
     justify-content: center;
     margin-top: 20px;
+    margin-left: 20px; /* Adjust spacing between branches */
 }
 
 .node {
     padding: 10px;
     background-color: #fff;
-    margin: 0 10px;
+    margin: 10px 0; /* Adjust margins */
     position: relative;
     font-family: Arial, sans-serif;
 }
@@ -37,32 +39,26 @@
 #n10000 {
     background-color: #bdbdbd;
 }
-
 /* Styling for Level 1 */
 #n11000 {
     color: white;
     background-color: #40a13e;
 } 
-
 #n12000 {
     background-color: #bdbdbd;
 }
-
 /* Styling for Level 2 */
 #n11100 {
     background-color: #104f10;
     color: white;
 }
-
 #n11200 {
     background-color: #8cb88c;
 }
-
 /* Styling for Level 3 */
 #n11110, #n11120 {
     background-color: #006400;
 }
-
 #n11120 {
     background-color: #6495ed;
 }

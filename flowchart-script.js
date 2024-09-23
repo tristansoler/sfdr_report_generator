@@ -14,10 +14,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 const nodeRect = node.getBoundingClientRect();
                 const svgRect = svg.getBoundingClientRect();
 
-                const startX = parentRect.left + parentRect.width / 2 - svgRect.left;
-                const startY = parentRect.bottom - svgRect.top;
-                const endX = nodeRect.left + nodeRect.width / 2 - svgRect.left;
-                const endY = nodeRect.top - svgRect.top;
+                // Adjusted calculations for horizontal layout
+                const startX = parentRect.right - svgRect.left; // Right edge of parent node
+                const startY = parentRect.top + parentRect.height / 2 - svgRect.top; // Vertical center of parent
+                const endX = nodeRect.left - svgRect.left; // Left edge of child node
+                const endY = nodeRect.top + nodeRect.height / 2 - svgRect.top; // Vertical center of child
+
 
                 line.setAttribute('x1', startX);
                 line.setAttribute('y1', startY);
