@@ -22,12 +22,10 @@ body {
     width: 100pt;
     height: auto;
 }
-
 .logo {
     width: 100%;
     height: auto;
 }
-
 .page-container {
     width: 100%;
     display: flex;
@@ -44,7 +42,6 @@ body {
     box-sizing: border-box;
     text-align: justify;
 }
-
 .heading p {
     margin: 0 0 10px 0;
     word-wrap: break-word;
@@ -60,7 +57,6 @@ body {
     max-width: 100%;
     overflow-wrap: break-word;
 }
-
 .main-heading {
     font-size: 12pt;
     font-weight: bold;
@@ -85,14 +81,13 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Gray box styles */
+/* GRAY BOXES STYLE */
 .gray-boxes {
     position: absolute;
     text-align: left;
     left: 10pt;
     width: 100pt;
 }
-
 .gray-box {
     background-color: rgb(223, 222, 222);
     padding: 0pt;
@@ -100,52 +95,52 @@ body {
     font-size: 8pt;
     line-height: 1.3;
 }
+.gray-box-image {
+    width: 100%;
+    height: auto;
+    width: 40px;
+    height: 40px;
+    /*center*/
+    margin-left: 25pt;
+}
 
 /* Orange Box styles */
 .ob-header {
     background-color: #FFDAB9;
     padding: 5px;
 }
-
 .ob-header h2 {
     margin: 0 0 10px 0;
     font-size: 12pt;
     justify-content: center;
 }
-
 .ob-options {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
-
 .ob-option {
     display: flex;
     align-items: center;
 }
-
 .ob-dots {
     display: flex;
     margin-right: 8px;
 }
-
 .ob-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     margin-right: 2px;
 }
-
 .ob-dot.green {
     background-color: #32CD32;
     border: 1px #32CD32;
 }
-
 .ob-dot.white {
     background-color: white;
 }
-
 .ob-checkbox {
     width: 15px;
     height: 15px;
@@ -158,38 +153,32 @@ body {
     font-weight: bold;
     flex-shrink: 0;
 }
-
 .ob-body {
     background-color: #FFE4B5;
     padding: 20px;
 }
-
 .ob-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     font-size: 11px;
 }
-
 .ob-item {
     display: flex;
     align-items: flex-start;
     margin-bottom: 8px;
     flex-wrap: wrap;
 }
-
 .ob-item-text {
     flex: 1;
     min-width: 0;
     font-size: 11pt;
 }
-
 .ob-sub-item {
     margin-left: 28px;
 }
 
 /* Question styles */
-
 .main-question-container {
     display: flex;
     align-items: flex-start;
@@ -201,7 +190,6 @@ body {
     text-align: justify;
 
 }
-
 .question-icon {
     width: 60px;
     height: 60px;
@@ -209,19 +197,16 @@ body {
     /* let's move icon to the left few points*/
     margin-left: -65pt;
 }
-
 .main-question {
     font-size: 12pt;
     font-weight: bold;
     margin-top: 10pt; /* Adjust this value to align the text vertically with the icon */
 }
-
 .sub-question {
     position: relative;
     padding-left: 0pt;
     margin-bottom: 15pt;
 }
-
 .sub-question::before {
     content: "";
     width: 8pt;
@@ -232,7 +217,6 @@ body {
     left: -20pt;
     top: 3pt;
 }
-
 .sub-qtext {
     font-size: 10pt;
     font-style: italic;
@@ -240,12 +224,12 @@ body {
     margin-top: 0;
     margin-bottom: 5pt;
 }
-
 .sub-sub-question {
     font-style: italic;
     margin-top: 15pt;
     margin-bottom: 10pt;
 }
+
 /* Answer & Main Text Styles */
 .answer-text {
     width: 100%;
@@ -258,13 +242,13 @@ body {
     text-align: justify;
 
 }
+
 /* List styles */
 ul {
     padding-left: 15pt;
     margin-top: 0;
     margin-bottom: 10pt;
 }
-
 li {
     margin-bottom: 5pt;
 }
@@ -342,15 +326,11 @@ td:first-child {
     border-right: 0.01px solid;
     text-align: left;
 }
-
-/* align first two column and add righ padding 40px*/
-td:nth-child(1), td:nth-child(2) {
+td:nth-child(1), td:nth-child(2) { /* align first two column and add righ padding 40px*/
     padding-right: 40px;
     text-align: left;
 }
-
-/*add 5px left padding to second column*/
-td:nth-child(2) {
+td:nth-child(2) { /*add 5px left padding to second column*/
     padding-left: 5px;
 }
 
@@ -359,7 +339,6 @@ td:nth-child(2) {
 .col2 { width: var(--col2-width); }
 .col3 { width: var(--col3-width); }
 .col4 { width: var(--col4-width); }
-
 /* Table Datapoints Style */
 .key-invest {
     text-align: left;
@@ -459,7 +438,30 @@ td:nth-child(2) {
     display: flex;
     gap: 1rem;
 }
-/*FOOT NOTE STYle*/
-.footnote {
 
+
+/* Footnote Style */
+.footnote {
+    font-size: 8pt;
+    text-align: justify;
+    position: relative;
+    margin-top: 800px;
+    margin-right: 40pt;
+    padding-top: 10px;
+    clear: both;
+}
+
+.footnote hr {
+    border: none;
+    border-top: 1px solid #999;
+    margin-bottom: 5pt;
+}
+
+/* Ensure the footnote stays with Question 5 content */
+.main-question-container:nth-of-type(5) {
+    margin-bottom: 0;
+}
+
+.q5-checkbox-group:last-of-type {
+    margin-bottom: 60px; /* Adjust this value based on the height of your footnote */
 }
