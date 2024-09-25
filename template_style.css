@@ -14,6 +14,27 @@ body {
     background-color: white;
 }
 
+/*containers*/
+.page-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 140pt;
+    padding-right: 40pt;
+    padding-top: 20px;
+}
+.elements-container {
+    width: 100%;
+    max-width: 785pt;
+    margin-right: 60pt;
+    padding-right: 40pt;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
+
+}
+
 /* Logo style */
 .logo-container {
     position: absolute;
@@ -25,14 +46,6 @@ body {
 .logo {
     width: 100%;
     height: auto;
-}
-.page-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 140pt;
-    padding-right: 40pt;
-    padding-top: 20px;
 }
 
 /* Heading styles */
@@ -249,11 +262,22 @@ body {
     font-weight: bold;
     margin-top: 0;
     margin-bottom: 5pt;
+    max-width: 785pt;
+    padding-right: 40pt;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
 }
 .sub-sub-question {
     font-style: italic;
     margin-top: 15pt;
     margin-bottom: 10pt;
+    padding-right: 40pt;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
 }
 
 /* Answer & Main Text Styles */
@@ -266,7 +290,6 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
     text-align: justify;
-
 }
 
 /* List styles */
