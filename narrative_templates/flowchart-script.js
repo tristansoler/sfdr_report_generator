@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Append the polyline to the SVG
                 svg.appendChild(polyline);
+
             }
         }
     });
