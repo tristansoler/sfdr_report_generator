@@ -196,24 +196,15 @@ body {
 }
 
 /*Orange Box Chart Styles*/
-.charts {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 20px;
-}
 .chart {
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
-    aspect-ratio: 1 / 1;
-    position: relative;
-}
-.chart img {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    max-width: 600px; /* Adjust based on your needs */
+    margin: 0 auto; /* Center the chart */
+}
+
+.chart img {
+    width: 100%;
+    height: auto;
     display: block;
 }
 
