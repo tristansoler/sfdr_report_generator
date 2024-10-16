@@ -1,3 +1,4 @@
+#%%
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -28,7 +29,7 @@ def prepare_data(df, include_sb):
             'rest': df[f'total_opex_rest{suffix}'].values[0]
         }
     }
-    return pd.DataFrame(data).transpose()
+    return pd.DataFrame(data)
 
 # Prepare data for both charts
 data_with_sb = prepare_data(df, True)
@@ -36,7 +37,7 @@ data_without_sb = prepare_data(df, False)
 
 # Function to create a single chart
 def create_chart(ax, data, title):
-    categories = list(data.index)
+    categories = ['Volumen de\nnegocios', 'CapEx', 'OpEx']
     cumulative = np.zeros(len(categories))
     colors = ['#98fb98', '#2e8b57', '#1a472a', '#d3d3d3']
     labels = ['Taxonomía alineada: gas fósil', 'Taxonomía alineada: nuclear', 
@@ -44,8 +45,8 @@ def create_chart(ax, data, title):
 
     bar_height = 0.3  # Adjust this value to change the thickness of the bars
 
-    for i, column in enumerate(data.columns):
-        values = data[column]
+    for i, column in enumerate(['gas', 'nuclear', 'nogasnonuclear', 'rest']):
+        values = [data[cat][column] for cat in categories]
         ax.barh(categories, values, left=cumulative, color=colors[i], label=labels[i], height=bar_height)
         cumulative += values
 
@@ -61,8 +62,8 @@ def create_chart(ax, data, title):
     for i, category in enumerate(categories):
         cumsum = 0
         small_values = []
-        for j, column in enumerate(data.columns):
-            width = data.loc[category, column]
+        for j, column in enumerate(['gas', 'nuclear', 'nogasnonuclear', 'rest']):
+            width = data[category][column]
             if width > 0:
                 if width < 10 or (j == 2 and width < 15):  # Condition for small values including 'sin gas y nuclear'
                     small_values.append((width, j, cumsum))
@@ -100,7 +101,7 @@ def create_chart(ax, data, title):
 
     # Adjust y-tick labels
     ax.set_yticks(range(len(categories)))
-    ax.set_yticklabels(categories)
+    ax.set_yticklabels(categories[::-1])  # Reverse the order to match the desired layout
 
 # Create the figure and axes
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 6))  # Set to (10, 6) as requested
@@ -116,3 +117,4 @@ fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.05), nco
 plt.tight_layout()
 plt.subplots_adjust(bottom=0.2)
 plt.show()
+# %%
