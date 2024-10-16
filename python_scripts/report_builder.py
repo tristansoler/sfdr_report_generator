@@ -9,7 +9,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Set up paths
 excel_path = os.path.join(script_dir, '..', 'excel_books', 'art8_spashares10_data.xlsx')
 template_dir = os.path.join(script_dir, '..', 'narrative_templates')
-template_file = 'art8_spshares_10_art8_spshares_10.html'
+template_file = 'art8_spshares_10_narrative_template.html'
 output_dir = os.path.join(script_dir, '..', 'art8_final_reports')
 
 # Read the Excel file

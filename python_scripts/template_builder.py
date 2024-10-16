@@ -53,7 +53,7 @@ for col in column_names:
         element.append(BeautifulSoup(value, 'html.parser'))  # Insert the new content safely
 
 # Save the result to a new HTML file in the specified directory
-output_filename = f"{first_row['narrative']}_{first_row['narrative']}.html"
+output_filename = f"{first_row['narrative']}_narrative_template.html"
 output_path = os.path.join(output_dir, output_filename)
 
 with open(output_path, "w", encoding="utf-8") as output_file:
