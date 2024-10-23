@@ -3,51 +3,35 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def build_plot(excel_path, output_dir, report_id):
-    # Define the relevant Excel file columns
-    target_cols = ['total_turnover_aligned_sbexcluded', 'total_turnover_aligned', 'total_turnover_gas', 'total_turnover_gas_sbexcluded', 
-                   'total_turnover_nuclear', 'total_turnover_nuclear_sbexcluded', 'total_turnover_nogasnonuclear', 
-                   'total_turnover_nogasnonuclear_sbexcluded','total_turnover_rest', 'total_turnover_rest_sbexcluded', 
-                   'total_capex_aligned', 'total_capex_aligned_sbexcluded', 'total_capex_gas', 'total_capex_gas_sbexcluded', 
-                   'total_capex_nuclear', 'total_capex_nuclear_sbexcluded', 'total_capex_nogasnonuclear', 'total_capex_nogasnonuclear_sbexcluded',
-                   'total_capex_rest', 'total_capex_rest_sbexcluded', 
-                   'total_opex_aligned', 'total_opex_aligned_sbexcluded', 'total_opex_gas', 'total_opex_gas_sbexcluded', 
-                   'total_opex_nuclear', 'total_opex_nuclear_sbexcluded', 'total_opex_nogasnonuclear', 'total_opex_nogasnonuclear_sbexcluded', 
-                   'total_opex_rest', 'total_opex_rest_sbexcluded']
-
-    # Read the Excel file and select target_cols
-    df = pd.read_excel(excel_path, 
-                       usecols=target_cols,
-                       sheet_name="art8_spshare10_holders") # Remove the sheet name after being done testing
-
+def build_plot(row_data, output_dir, report_id):
     # Function to create data for a single chart
-    def prepare_data(df, include_sb):
+    def prepare_data(row, include_sb):
         suffix = '' if include_sb else '_sbexcluded'
         data = {
             'Volumen de\nnegocios': {
-                'gas': df[f'total_turnover_gas{suffix}'].values[0],
-                'nuclear': df[f'total_turnover_nuclear{suffix}'].values[0],
-                'nogasnonuclear': df[f'total_turnover_nogasnonuclear{suffix}'].values[0],
-                'rest': df[f'total_turnover_rest{suffix}'].values[0]
+                'gas': row[f'total_turnover_gas{suffix}'],
+                'nuclear': row[f'total_turnover_nuclear{suffix}'],
+                'nogasnonuclear': row[f'total_turnover_nogasnonuclear{suffix}'],
+                'rest': row[f'total_turnover_rest{suffix}']
             },
             'CapEx': {
-                'gas': df[f'total_capex_gas{suffix}'].values[0],
-                'nuclear': df[f'total_capex_nuclear{suffix}'].values[0],
-                'nogasnonuclear': df[f'total_capex_nogasnonuclear{suffix}'].values[0],
-                'rest': df[f'total_capex_rest{suffix}'].values[0]
+                'gas': row[f'total_capex_gas{suffix}'],
+                'nuclear': row[f'total_capex_nuclear{suffix}'],
+                'nogasnonuclear': row[f'total_capex_nogasnonuclear{suffix}'],
+                'rest': row[f'total_capex_rest{suffix}']
             },
             'OpEx': {
-                'gas': df[f'total_opex_gas{suffix}'].values[0],
-                'nuclear': df[f'total_opex_nuclear{suffix}'].values[0],
-                'nogasnonuclear': df[f'total_opex_nogasnonuclear{suffix}'].values[0],
-                'rest': df[f'total_opex_rest{suffix}'].values[0]
+                'gas': row[f'total_opex_gas{suffix}'],
+                'nuclear': row[f'total_opex_nuclear{suffix}'],
+                'nogasnonuclear': row[f'total_opex_nogasnonuclear{suffix}'],
+                'rest': row[f'total_opex_rest{suffix}']
             }
         }
         return pd.DataFrame(data)
 
     # Prepare data for both charts
-    data_with_sb = prepare_data(df, True)
-    data_without_sb = prepare_data(df, False)
+    data_with_sb = prepare_data(row_data, True)
+    data_without_sb = prepare_data(row_data, False)
 
     # Function to create a single chart
     def create_chart(ax, data, title):

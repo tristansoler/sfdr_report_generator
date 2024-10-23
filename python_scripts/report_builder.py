@@ -8,7 +8,7 @@ import plot_builder
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Set up paths
-excel_path = os.path.join(script_dir, '..', 'excel_books', 'art8_spashares10_data.xlsx')
+excel_path = os.path.join(script_dir, '..', 'excel_books', 'art8_spashares10_data_prototype.xlsx')
 template_dir = os.path.join(script_dir, '..', 'narrative_templates')
 template_file = 'art8_spshares_10_narrative_template.html'
 output_dir = os.path.join(script_dir, '..', 'art8_final_reports')
@@ -20,6 +20,8 @@ os.makedirs(plots_dir, exist_ok=True)
 
 # Read the Excel file
 df = pd.read_excel(excel_path)
+# Remove unwanted spaces from column names
+df.columns = df.columns.str.strip()
 
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader(template_dir))
@@ -28,7 +30,7 @@ template = env.get_template(template_file)
 # Generate a report for each row
 for index, row in df.iterrows():
     # Generate the plot
-    plot_filename = plot_builder.build_plot(excel_path, plots_dir, index)
+    plot_filename = plot_builder.build_plot(row, plots_dir, index)
     
     # Prepare data for the template
     data = {
@@ -41,8 +43,8 @@ for index, row in df.iterrows():
         'SFDR_LAST_REP_INV_SUST_ENV': row['{{SFDR_LAST_REP_INV_SUST_ENV}}'],
         'SFDR_LAST_REP_SUST_INV_SOC': row['{{SFDR_LAST_REP_SUST_INV_SOC}}'],
         'SHR_TRANS_ACTIVIT_TO': row['{{SHR_TRANS_ACTIVIT_TO}}'],
-        'SHR_ENABL_ACTIVIT_TO': row[' {{SHR_ENABL_ACTIVIT_TO}}'],
-        'OTHERS': row[' {{OTHERS}}'],
+        'SHR_ENABL_ACTIVIT_TO': row['{{SHR_ENABL_ACTIVIT_TO}}'],
+        'OTHERS': row['{{OTHERS}}'],
         'YEAR': datetime.now().year,
         'YEAR_PREV': datetime.now().year - 1,
         'plot_path': os.path.join('plots', plot_filename)  # Relative path to the plot
