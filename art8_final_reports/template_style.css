@@ -470,25 +470,49 @@ td:nth-child(2) { /*add 5px left padding to second column*/
     gap: 1rem;
 }
 /* Footnote Style */
+.footnote-container {
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    page-break-inside: avoid;
+}
+
 .footnote {
     font-size: 8pt;
     text-align: justify;
     position: relative;
-    margin-top: 275px;
-    margin-bottom: 25px;
-    margin-right: 40pt;
+    bottom: 0;
+    left: 0;
+    right: 40pt;
     padding-top: 10px;
     clear: both;
 }
+
 .footnote hr {
     border: none;
     border-top: 1px solid #999;
     margin-bottom: 5pt;
 }
+
 /* Ensure the footnote stays with Question 5 content */
 .main-question-container:nth-of-type(5) {
     margin-bottom: 0;
 }
+
 .q5-checkbox-group:last-of-type {
-    margin-bottom: 60px; /* Adjust this value based on the height of your footnote */
+    margin-bottom: 20px;
+}
+
+/* Add a page break after the footnote */
+.footnote-container::after {
+    content: '';
+    display: block;
+    page-break-after: always;
+}
+
+/* Prevent text overlap */
+.sub-question,
+.q5-checkbox-group,
+.footnote-container {
+    page-break-inside: avoid;
 }
