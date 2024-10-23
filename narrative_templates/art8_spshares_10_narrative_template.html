@@ -703,7 +703,8 @@
 </p>
 <!--Add graph image-->
 <div class="chart">
-<img alt="Ajuste a la taxonomía de las inversiones." src="graphs_plots\plot_orb_full.png"/>
+    <!--Change the source path to dynamically read the output of the plot builder-->
+    <img alt="Ajuste a la taxonomía de las inversiones." src="{{ plot_path }}"/> <!--Change the path to -->
 </div>
 <p style="font-style: italic;">
                         *A efectos de estos gráficos, los «bonos soberanos» incluyen todas las exposiciones soberanas.
