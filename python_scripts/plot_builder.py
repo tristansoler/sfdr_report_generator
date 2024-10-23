@@ -4,8 +4,21 @@ import numpy as np
 import os
 
 def build_plot(excel_path, output_dir, report_id):
-    # Read the Excel file
-    df = pd.read_excel(excel_path)
+    # Define the relevant Excel file columns
+    target_cols = ['total_turnover_aligned_sbexcluded', 'total_turnover_aligned', 'total_turnover_gas', 'total_turnover_gas_sbexcluded', 
+                   'total_turnover_nuclear', 'total_turnover_nuclear_sbexcluded', 'total_turnover_nogasnonuclear', 
+                   'total_turnover_nogasnonuclear_sbexcluded','total_turnover_rest', 'total_turnover_rest_sbexcluded', 
+                   'total_capex_aligned', 'total_capex_aligned_sbexcluded', 'total_capex_gas', 'total_capex_gas_sbexcluded', 
+                   'total_capex_nuclear', 'total_capex_nuclear_sbexcluded', 'total_capex_nogasnonuclear', 'total_capex_nogasnonuclear_sbexcluded',
+                   'total_capex_rest', 'total_capex_rest_sbexcluded', 
+                   'total_opex_aligned', 'total_opex_aligned_sbexcluded', 'total_opex_gas', 'total_opex_gas_sbexcluded', 
+                   'total_opex_nuclear', 'total_opex_nuclear_sbexcluded', 'total_opex_nogasnonuclear', 'total_opex_nogasnonuclear_sbexcluded', 
+                   'total_opex_rest', 'total_opex_rest_sbexcluded']
+
+    # Read the Excel file and select target_cols
+    df = pd.read_excel(excel_path, 
+                       usecols=target_cols,
+                       sheet_name="art8_spshare10_holders") # Remove the sheet name after being done testing
 
     # Function to create data for a single chart
     def prepare_data(df, include_sb):
