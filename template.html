@@ -496,16 +496,34 @@
                 <div class="nodes">
                     <div class="node" id="n10000">Inversiones</div>
                     <div class="branch-horizontal">
-                        <div class="node" id="n11000" data-parent="n10000">n.º 1 Ajustadas a características medioambientales o sociales</div>
-                        <div class="node" id="n12000" data-parent="n10000">n.º 2 Otras</div>
+                        <div class="node" id="n11000" data-parent="n10000">
+                            <p>n.º 1 Ajustadas a características medioambientales o sociales</p>
+                            <p>{{es_aligned}}</p>
+                        </div>
+                        <div class="node" id="n12000" data-parent="n10000">
+                            <p>n.º 2 Otras</p>
+                            <p>{{1-es_aligned}}</p>
+                        </div>
                     </div>
                     <div class="branch-horizontal">
-                        <div class="node" id="n11100" data-parent="n11000">n.º 1A Sostenibles</div>
-                        <div class="node" id="n11200" data-parent="n11000">n.º 1B Otras características medioambientales o sociales</div>
+                        <div class="node" id="n11100" data-parent="n11000">
+                            <p>n.º 1A Sostenibles</p>
+                            <p>{{sust_invest}}</p>
+                        </div>
+                        <div class="node" id="n11200" data-parent="n11000">
+                            <p>n.º 1B Otras características medioambientales o sociales</p>
+                            <p>{{1-sust_invest}}</p>
+                        </div>
                     </div>
                     <div class="sub-branch-horizontal">
-                        <div class="node" id="n11110" data-parent="n11100">Otras medioambientales</div>
-                        <div class="node" id="n11120" data-parent="n11100">Sociales</div>
+                        <div class="node" id="n11110" data-parent="n11100">
+                            <p>Otras medioambientales</p>
+                            <p>{{sust_invest_env}}</p>  
+                        </div>
+                        <div class="node" id="n11120" data-parent="n11100">
+                            <p>Social</p>
+                            <p>{{sust_invest_soc}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
