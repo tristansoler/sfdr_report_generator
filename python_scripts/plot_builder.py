@@ -14,7 +14,9 @@ def build_plot(row_data, output_dir, report_id):
                 "gas": row[f"total_turnover_gas{suffix}"],
                 "nuclear": row[f"total_turnover_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_turnover_nogasnonuclear{suffix}"],
-                "rest": row[f"total_turnover_rest{suffix}"],
+                "rest": row[
+                    f"total_turnover_rest{suffix}"
+                ],  # need to modify "rest", we don't get it anymore
             },
             "CapEx": {
                 "gas": row[f"total_capex_gas{suffix}"],
