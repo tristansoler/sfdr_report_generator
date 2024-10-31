@@ -1,6 +1,8 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 
+# add feature to translate values column "Sector"
+
 # Read the Excel file
 df = pd.read_excel(
     r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\test_fund_content.xlsx"
