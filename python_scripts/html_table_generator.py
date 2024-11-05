@@ -1,63 +1,72 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# add feature to translate values column "Sector"
 
-# Read the Excel file
-df = pd.read_excel(
-    r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\test_fund_content.xlsx"
-)
+def generate_html_table(df, table_structure="investment"):
+    """
+    Generate HTML table without the wrapper div
 
-# Generate the HTML table
-html_str = df.to_html(classes="dataframe", index=False)
+    Parameters:
+    df : pandas DataFrame
+        The data to convert to HTML
+    table_structure : str
+        Either 'investment' or 'sector' to determine the table structure
+    """
+    # Generate the initial HTML table
+    html_str = df.to_html(classes="dataframe", index=False)
 
-# Parse the HTML using BeautifulSoup
-soup = BeautifulSoup(html_str, "html.parser")
+    # Parse the HTML using BeautifulSoup
+    soup = BeautifulSoup(html_str, "html.parser")
+
+    # Remove the first th from the header if it exists (in case of an index)
+    header_row = soup.find("thead").find("tr")
+    if header_row.find("th"):
+        header_row.find("th").decompose()
+
+    # Remove the first td from each row in the body if it exists
+    for row in soup.find("tbody").find_all("tr"):
+        if row.find("td"):
+            row.find("td").decompose()
+
+    # Define column structure based on table type
+    if table_structure == "investment":
+        colgroup = """
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+                <col class="col3">
+                <col class="col4">
+            </colgroup>
+        """
+    else:  # sector structure
+        colgroup = """
+            <colgroup>
+                <col class="col1">
+                <col class="col2">
+            </colgroup>
+        """
+
+    # Create the table structure without the wrapper div
+    new_table = f"""
+        <table>
+            {colgroup}
+            <thead>
+                <tr>
+                    {"".join(f"<th>{col}</th>" for col in df.columns)}
+                </tr>
+            </thead>
+            {str(soup.find("tbody"))}
+        </table>
+    """
+
+    return new_table
 
 
-# Function to safely remove an element if it exists
-def safe_remove(element):
-    if element:
-        element.decompose()
+# If running as main script, test the function
+if __name__ == "__main__":
+    # Test data
+    test_df = pd.DataFrame(
+        {"Column1": ["Test1", "Test2"], "Column2": ["Value1", "Value2"]}
+    )
 
-
-# Remove the first th from the header if it exists (in case of an index)
-header_row = soup.find("thead").find("tr")
-safe_remove(header_row.find("th"))
-
-# Remove the first td from each row in the body if it exists (in case of an index)
-for row in soup.find("tbody").find_all("tr"):
-    safe_remove(row.find("td"))
-
-# Extract the modified table body content
-table_body = soup.find("tbody")
-
-# Get the actual column names from the DataFrame
-column_names = df.columns.tolist()
-
-# Create the new table structure
-new_table = f"""
-<div class="table-body" id="q03_t1">
-    <table class="dataframe">
-        <colgroup>
-            <col class="col1">
-            <col class="col2">
-            <col class="col3">
-            <col class="col4">
-        </colgroup>
-        <thead>
-            <tr>
-                {"".join(f"<th>{col}</th>" for col in column_names)}
-            </tr>
-        </thead>
-        {str(table_body)}
-    </table>
-</div>
-"""
-
-# Print or save the new table
-print(new_table)
-
-# Optionally, save to a file
-# with open('robust_table.html', 'w', encoding='utf-8') as f:
-#     f.write(new_table)
+    print(generate_html_table(test_df, "sector"))
