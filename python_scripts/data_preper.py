@@ -8,6 +8,7 @@ from html_table_generator import generate_html_table
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 
+# Define the function to read the Excel file and extract the tables
 def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
     # First, read the entire Excel file
     df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=skiprows)
@@ -39,6 +40,7 @@ def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
     return df
 
 
+# Define the function to process the Excel file and Convert Sector and Investment tables to HTML
 def process_excel_file(file_path):
     # Read the main dataframe and the two tables
     df = read_excel_table(
@@ -51,6 +53,8 @@ def process_excel_file(file_path):
 
     # Keep only the first 16 rows of investment table
     investment = investment.head(16)
+    # Delete any column with name == ISIN
+    investment = investment.loc[:, investment.columns != "ISIN"]
 
     # Generate HTML tables without wrapper divs
     investment_html = generate_html_table(investment, "investment")
@@ -65,3 +69,12 @@ def process_excel_file(file_path):
 
 file_path = r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05240 04-11-2024 Post-contractual Info.xlsx"
 result_df = process_excel_file(file_path)
+
+# Let's read the BBDD file and rename the column aladdin_code to security_description
+bbdd = pd.read_excel(
+    r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\bbdd_sfdr_wip.xlsx"
+)
+bbdd.rename(columns={"aladdin_code": "security_description"}, inplace=True)
+
+# Merge the two dataframes left jon on security_description
+result_df = pd.merge(result_df, bbdd, on="security_description", how="left")
