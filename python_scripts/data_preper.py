@@ -1,5 +1,6 @@
-# %%
+import datetime
 import warnings
+from pathlib import Path
 
 import pandas as pd
 from html_table_generator import generate_html_table
@@ -7,30 +8,41 @@ from html_table_generator import generate_html_table
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
+# Define paths
+base_path = Path.home() / "Documents" / "sfdr_report_generator"
+input_path = base_path / "excel_books"
+output_path = base_path / "final_processed_data"
+aladdin_data_path = input_path / "aladdin_data"
+bbdd_file = input_path / "bbdd_sfdr_wip.xlsx"
 
-# Define the function to read the Excel file and extract the tables
+# Create output directory if it doesn't exist
+output_path.mkdir(parents=True, exist_ok=True)
+
+# Read Auxiliary data to all the funds, the BBDD file
+bbdd = pd.read_excel(bbdd_file)
+bbdd.rename(
+    columns={"aladdin_code": "security_description"}, inplace=True
+)  # Rename column to match the other dataframes
+
+
+# Define the function to read the Fund Excel file and extract the tables
 def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
-    # First, read the entire Excel file
+    # Read the entire Excel file
     df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=skiprows)
 
-    # Find the last valid row by looking for the first row where all values are NaN
-    # or where the first column contains specific footer text indicators
+    # Find the last valid row
     footer_indicators = ["Confidential", "Powered by"]
-
     last_valid_idx = None
     for idx, row in df.iterrows():
-        # Check if all values in the row are NaN
         if row.isna().all():
             last_valid_idx = idx
             break
-
-        # Check if the first column contains any footer indicators
         first_col_value = str(row.iloc[0])
         if any(indicator in first_col_value for indicator in footer_indicators):
             last_valid_idx = idx
             break
 
-    # If we found a cutoff point, slice the dataframe
+    # Slice the dataframe if we found a cutoff point
     if last_valid_idx is not None:
         df = df.iloc[:last_valid_idx]
 
@@ -67,14 +79,39 @@ def process_excel_file(file_path):
     return df
 
 
-file_path = r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05240 04-11-2024 Post-contractual Info.xlsx"
-result_df = process_excel_file(file_path)
+def process_all_excel_files(folder_path):
+    # Get all Excel files in the specified folder
+    excel_files = list(folder_path.glob("*.xlsx"))
 
-# Let's read the BBDD file and rename the column aladdin_code to security_description
-bbdd = pd.read_excel(
-    r"C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\bbdd_sfdr_wip.xlsx"
-)
-bbdd.rename(columns={"aladdin_code": "security_description"}, inplace=True)
+    # List to store DataFrames for each file
+    dfs = []
 
-# Merge the two dataframes left jon on security_description
-result_df = pd.merge(result_df, bbdd, on="security_description", how="left")
+    for file_path in excel_files:
+        print(f"Processing file: {file_path}")
+        df = process_excel_file(file_path)
+        dfs.append(df)
+
+    # Concatenate all DataFrames vertically
+    final_df = pd.concat(dfs, ignore_index=True)
+
+    # Merge with the BBDD file
+    final_df = pd.merge(final_df, bbdd, on="security_description", how="left")
+
+    return final_df
+
+
+# Process all Excel files and get the final DataFrame
+result_df = process_all_excel_files(aladdin_data_path)
+
+# Now result_df contains the processed data from all Excel files
+print(result_df.shape)
+print(result_df.columns)
+
+# Get the current date in yyyymmdd format
+current_date = datetime.datetime.now().strftime("%Y%m%d")
+
+# Save the final DataFrame to a new Excel file with the date in the filename
+output_file = output_path / f"{current_date}_final_processed_data.xlsx"
+result_df.to_excel(output_file, index=False)
+
+print(f"Final processed data saved to: {output_file}")
