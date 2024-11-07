@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 from bs4 import BeautifulSoup
 
@@ -24,9 +23,6 @@ df = pd.read_excel(excel_file)
 # Load the HTML template
 with open(template_file, "r", encoding="utf-8") as file:
     template_content = file.read()
-
-# Parse the HTML using BeautifulSoup
-soup = BeautifulSoup(template_content, "html.parser")
 
 # List of the column names (after the first two columns)
 column_names = [
@@ -62,34 +58,44 @@ column_names = [
     "q10sq04_a",
 ]
 
-# Process the first row of the Excel sheet (modify this for all rows if needed)
-first_row = df.iloc[0]
+# Filter the df and select the rows with the narrative == sostenible_fi_eq & narrative == sostenible_fi
+df = df.loc[
+    (df["narrative"] == "sostenible_fi_eq") | (df["narrative"] == "sostenible_fi")
+]
 
-# Loop through the column names and replace the content of the elements in the HTML
-for col in column_names:
-    # Find the element by its id (which matches the column name)
-    element = soup.find(id=col)
+# Process each row of the filtered DataFrame
+for index, row in df.iterrows():
+    # Parse the HTML using BeautifulSoup (create a new soup for each iteration)
+    soup = BeautifulSoup(template_content, "html.parser")
 
-    if element:
-        # Get the value from the DataFrame (handle NaN and non-string types)
-        value = first_row[col]
+    # Loop through the column names and replace the content of the elements in the HTML
+    for col in column_names:
+        # Find the element by its id (which matches the column name)
+        element = soup.find(id=col)
 
-        if pd.isna(value):
-            value = ""  # Handle NaN values by inserting an empty string
-        else:
-            value = str(value)  # Ensure the value is converted to a string
+        if element:
+            # Get the value from the DataFrame (handle NaN and non-string types)
+            value = row[col]
 
-        # Clear the existing content and insert the new content
-        element.clear()  # Remove any existing content
-        element.append(
-            BeautifulSoup(value, "html.parser")
-        )  # Insert the new content safely
+            if pd.isna(value):
+                value = ""  # Handle NaN values by inserting an empty string
+            else:
+                value = str(value)  # Ensure the value is converted to a string
 
-# Save the result to a new HTML file in the specified directory
-output_filename = f"{first_row['narrative']}_narrative_template.html"
-output_path = os.path.join(output_dir, output_filename)
+            # Clear the existing content and insert the new content
+            element.clear()  # Remove any existing content
+            element.append(
+                BeautifulSoup(value, "html.parser")
+            )  # Insert the new content safely
 
-with open(output_path, "w", encoding="utf-8") as output_file:
-    output_file.write(str(soup))
+    # Generate a unique filename for each row
+    output_filename = f"{row['narrative']}_narrative_template.html"
+    output_path = os.path.join(output_dir, output_filename)
 
-print(f"Generated HTML file: {output_path}")
+    # Save the result to a new HTML file in the specified directory
+    with open(output_path, "w", encoding="utf-8") as output_file:
+        output_file.write(str(soup))
+
+    print(f"Generated HTML file: {output_path}")
+
+print("All files have been generated.")
