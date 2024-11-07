@@ -4,6 +4,7 @@ from datetime import datetime
 import pandas as pd
 import plot_builder
 from jinja2 import Environment, FileSystemLoader
+from bs4 import BeautifulSoup
 
 # Get the current script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -64,11 +65,29 @@ for index, row in df.iterrows():
     # Render the template with the data
     html_content = template.render(data)
 
+    # Use BeautifulSoup to modify the HTML content
+    soup = BeautifulSoup(html_content, "html.parser")
+
+    # Update div with id "q03_t1"
+    q03_t1_div = soup.find("div", id="q03_t1")
+    if q03_t1_div and "q03_t1" in row:
+        q03_t1_div.clear()
+        q03_t1_div.append(BeautifulSoup(row["q03_t1"], "html.parser"))
+
+    # Update div with id "q04_t"
+    q04_t_div = soup.find("div", id="q04_t")
+    if q04_t_div and "q04_t" in row:
+        q04_t_div.clear()
+        q04_t_div.append(BeautifulSoup(row["q04_t"], "html.parser"))
+
+    # Get the modified HTML content
+    modified_html_content = str(soup)
+
     # Generate filename
     filename = f"{row['{{product_name}}'].replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.html"
 
     # Write the HTML file
     with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
-        f.write(html_content)
+        f.write(modified_html_content)
 
 print(f"Generated {len(df)} reports in the '{output_dir}' directory.")
