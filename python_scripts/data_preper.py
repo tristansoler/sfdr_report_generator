@@ -1,7 +1,10 @@
 import datetime
+import logging
 import warnings
 from pathlib import Path
-import logging
+
+import pandas as pd
+from html_table_generator import generate_html_table
 
 # Set up logging
 logging.basicConfig(
@@ -9,10 +12,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler("data_preper.log"), logging.StreamHandler()],
 )
-
-import pandas as pd
-from html_table_generator import generate_html_table
-
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
