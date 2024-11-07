@@ -10,11 +10,11 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Set up paths
 excel_path = os.path.join(
-    script_dir, "..", "excel_books", "art8_spashares10_data_prototype.xlsx"
+    script_dir, "..", "final_processed_data", "20241107_final_processed_data.xlsx"
 )
+
 template_dir = os.path.join(script_dir, "..", "narrative_templates")
-template_file = "art8_spshares_10_narrative_template.html"
-output_dir = os.path.join(script_dir, "..", "art8_final_reports")
+output_dir = os.path.join(script_dir, "..", "final_reports")
 plots_dir = os.path.join(output_dir, "plots")
 
 # Create output directories
@@ -28,28 +28,36 @@ df.columns = df.columns.str.strip()
 
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader(template_dir))
-template = env.get_template(template_file)
 
 # Generate a report for each row
 for index, row in df.iterrows():
+    # Determine the template file based on the 'narrative' column
+    template_file = f"{row['narrative']}_narrative_template.html"
+
+    # Check if the template file exists
+    if not os.path.exists(os.path.join(template_dir, template_file)):
+        print(f"Warning: Template file {template_file} not found. Skipping this row.")
+        continue
+
+    # Get the template
+    template = env.get_template(template_file)
+
     # Generate the plot
     plot_filename = plot_builder.build_plot(row, plots_dir, index)
 
     # Prepare data for the template
     data = {
-        "PRODUCT_NAME": row["{{PRODUCT_NAME}}"],
-        "LEI_CODE": row["{{LEI_CODE}}"],
-        "SFDR_LAST_REP_INV_SUST_INV": row["{{SFDR_LAST_REP_INV_SUST_INV}}"],
-        "ESG_RATING_23": row["{{ESG_RATING_23}}"],
-        "ESG_RATING_24": row["{{ESG_RATING_24}}"],
-        "SFDR_LAST_REP_INV_WITH_ENV_SOC": row["{{SFDR_LAST_REP_INV_WITH_ENV_SOC}}"],
-        "SFDR_LAST_REP_INV_SUST_ENV": row["{{SFDR_LAST_REP_INV_SUST_ENV}}"],
-        "SFDR_LAST_REP_SUST_INV_SOC": row["{{SFDR_LAST_REP_SUST_INV_SOC}}"],
-        "SHR_TRANS_ACTIVIT_TO": row["{{SHR_TRANS_ACTIVIT_TO}}"],
-        "SHR_ENABL_ACTIVIT_TO": row["{{SHR_ENABL_ACTIVIT_TO}}"],
-        "OTHERS": row["{{OTHERS}}"],
-        "YEAR": datetime.now().year,
-        "YEAR_PREV": datetime.now().year - 1,
+        "product_name": row["{{product_name}}"],
+        "lei_code": row["{{lei_code}}"],
+        "sust_invest": row["{{sust_invest}}"],
+        "esg_score_2023": row["{{esg_score_2023}}"],
+        "esg_score_2024": row["{{esg_score_2024}}"],
+        "es_aligned": row["{{es_aligned}}"],
+        "sust_invest_env": row["{{sust_invest_env}}"],
+        "sust_invest_soc": row["{{sust_invest_soc}}"],
+        "other_nones": row["{{other_nones}}"],
+        "ref_period": row["{{ref_period}}"],
+        "other_non_sust": row["{{other_non_sust}}"],
         "plot_path": os.path.join("plots", plot_filename),  # Relative path to the plot
     }
 
@@ -57,7 +65,7 @@ for index, row in df.iterrows():
     html_content = template.render(data)
 
     # Generate filename
-    filename = f"{row['{{PRODUCT_NAME}}'].replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.html"
+    filename = f"{row['{{product_name}}'].replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.html"
 
     # Write the HTML file
     with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:

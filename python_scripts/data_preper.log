@@ -1,0 +1,40 @@
+2024-11-07 10:41:27,097 - INFO - Processing all Excel files in C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data
+2024-11-07 10:41:27,098 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05240 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:41:27,158 - INFO - Single fund data file processed
+2024-11-07 10:41:27,159 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05241 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:41:27,217 - INFO - Single fund data file processed
+2024-11-07 10:41:27,219 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05273 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:41:27,252 - INFO - Single fund data file processed
+2024-11-07 10:41:27,254 - INFO - All funds files processed and merged.
+2024-11-07 10:41:27,255 - INFO - Updateing value of certain columns and generating new columns
+2024-11-07 10:41:27,258 - INFO - Saving final processed data to Excel file.
+2024-11-07 10:41:27,275 - INFO - Processed data from all Excel files.
+2024-11-07 10:41:27,276 - INFO - Final dataframe shape: (3, 56)
+2024-11-07 10:41:27,277 - INFO - Final processed data saved to: C:\Users\n740789\Documents\sfdr_report_generator\final_processed_data\20241107_final_processed_data.xlsx
+2024-11-07 10:45:52,569 - INFO - Processing all Excel files in C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data
+2024-11-07 10:45:52,569 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05240 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:45:52,635 - INFO - Single fund data file processed
+2024-11-07 10:45:52,635 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05241 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:45:52,694 - INFO - Single fund data file processed
+2024-11-07 10:45:52,695 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05273 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:45:52,726 - INFO - Single fund data file processed
+2024-11-07 10:45:52,728 - INFO - All funds files processed and merged.
+2024-11-07 10:45:52,729 - INFO - Updateing value of certain columns and generating new columns
+2024-11-07 10:45:52,731 - INFO - Saving final processed data to Excel file.
+2024-11-07 10:45:52,752 - INFO - Processed data from all Excel files.
+2024-11-07 10:45:52,753 - INFO - Final dataframe shape: (3, 56)
+2024-11-07 10:45:52,753 - INFO - Final processed data saved to: C:\Users\n740789\Documents\sfdr_report_generator\final_processed_data\20241107_final_processed_data.xlsx
+2024-11-07 10:59:30,757 - INFO - Processing all Excel files in C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data
+2024-11-07 10:59:30,758 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05240 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:59:30,867 - INFO - Single fund data file processed
+2024-11-07 10:59:30,868 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05241 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:59:30,925 - INFO - Single fund data file processed
+2024-11-07 10:59:30,926 - INFO - Processing excel fund file from C:\Users\n740789\Documents\sfdr_report_generator\excel_books\aladdin_data\FIG05273 04-11-2024 Post-contractual Info.xlsx
+2024-11-07 10:59:30,958 - INFO - Single fund data file processed
+2024-11-07 10:59:30,960 - INFO - All funds files processed and merged.
+2024-11-07 10:59:30,961 - INFO - Updateing value of certain columns and generating new columns
+2024-11-07 10:59:30,964 - INFO - Sorting columns in the final DataFrame.
+2024-11-07 10:59:30,965 - INFO - Saving final processed data to Excel file.
+2024-11-07 10:59:30,984 - INFO - Processed data from all Excel files.
+2024-11-07 10:59:30,985 - INFO - Final dataframe shape: (3, 56)
+2024-11-07 10:59:30,985 - INFO - Final processed data saved to: C:\Users\n740789\Documents\sfdr_report_generator\final_processed_data\20241107_final_processed_data.xlsx

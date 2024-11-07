@@ -7,28 +7,28 @@ import pandas as pd
 
 def build_plot(row_data, output_dir, report_id):
     # Function to create data for a single chart
-    def prepare_data(row, include_sb):
-        suffix = "" if include_sb else "_sbexcluded"
+    def prepare_data(row, include_sov):
+        suffix = "" if include_sov else "_exsovereign"
         data = {
             "Volumen de\nnegocios": {
                 "gas": row[f"total_turnover_gas{suffix}"],
                 "nuclear": row[f"total_turnover_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_turnover_nogasnonuclear{suffix}"],
                 "rest": row[
-                    f"total_turnover_rest{suffix}"
+                    f"rest_turnover_aligned{suffix}"
                 ],  # need to modify "rest", we don't get it anymore
             },
             "CapEx": {
                 "gas": row[f"total_capex_gas{suffix}"],
                 "nuclear": row[f"total_capex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_capex_nogasnonuclear{suffix}"],
-                "rest": row[f"total_capex_rest{suffix}"],
+                "rest": row[f"rest_opex_aligned{suffix}"],
             },
             "OpEx": {
                 "gas": row[f"total_opex_gas{suffix}"],
                 "nuclear": row[f"total_opex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_opex_nogasnonuclear{suffix}"],
-                "rest": row[f"total_opex_rest{suffix}"],
+                "rest": row[f"rest_capex_aligned{suffix}"],
             },
         }
         return pd.DataFrame(data)
