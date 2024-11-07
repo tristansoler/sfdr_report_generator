@@ -1,12 +1,23 @@
 import datetime
 import warnings
 from pathlib import Path
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("data_preper.log"), logging.StreamHandler()],
+)
 
 import pandas as pd
 from html_table_generator import generate_html_table
 
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
+
+# Get the current date in yyyymmdd format
+DATE = datetime.datetime.now().strftime("%Y%m%d")
 
 # Define paths
 base_path = Path.home() / "Documents" / "sfdr_report_generator"
@@ -54,6 +65,7 @@ def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
 
 # Define the function to process the Excel file and Convert Sector and Investment tables to HTML
 def process_excel_file(file_path):
+    logging.info(f"Processing excel fund file from {file_path}")
     # Read the main dataframe and the two tables
     df = read_excel_table(
         file_path, sheet_name="Post-Contractual Info Data", skiprows=3
@@ -76,10 +88,13 @@ def process_excel_file(file_path):
     df["q03_t1"] = investment_html
     df["q04_t"] = sector_html
 
+    logging.info("Single fund data file processed")
     return df
 
 
+# Define function to process all Excel files in the given folder
 def process_all_excel_files(folder_path):
+    logging.info(f"Processing all Excel files in {folder_path}")
     # Get all Excel files in the specified folder
     excel_files = list(folder_path.glob("*.xlsx"))
 
@@ -97,21 +112,88 @@ def process_all_excel_files(folder_path):
     # Merge with the BBDD file
     final_df = pd.merge(final_df, bbdd, on="security_description", how="left")
 
+    logging.info("All funds files processed and merged.")
     return final_df
 
 
 # Process all Excel files and get the final DataFrame
 result_df = process_all_excel_files(aladdin_data_path)
 
-# Now result_df contains the processed data from all Excel files
-print(result_df.shape)
-print(result_df.columns)
+logging.info(f"Updateing value of certain columns and generating new columns")
+# Multiply es_aligned, sust_invest, sust_invest_env,and sust_invest_soc columns by 100
+columns_to_multiply = [
+    "{{es_aligned}}",
+    "{{sust_invest}}",
+    "{{sust_invest_env}}",
+    "{{sust_invest_soc}}",
+]
+result_df[columns_to_multiply] *= 100
 
-# Get the current date in yyyymmdd format
-current_date = datetime.datetime.now().strftime("%Y%m%d")
+# Calculate new columns
+result_df["{{other_nones}}"] = 100 - result_df["{{es_aligned}}"]
+result_df["{{other_non_sust}}"] = 100 - result_df["{{sust_invest}}"]
+
+# Calculate 'rest_' columns
+aligned_columns = ["capex", "opex", "turnover"]
+for col in aligned_columns:
+    result_df[f"rest_{col}_aligned"] = 100 - result_df[f"total_{col}_aligned"]
+    result_df[f"rest_{col}_aligned_exsovereign"] = (
+        100 - result_df[f"total_{col}_aligned_exsovereign"]
+    )
+
+
+# Let's sort the column order
+def sort_columns(df):
+    logging.info("Sorting columns in the final DataFrame.")
+    # Define the first columns in the desired order
+    first_columns = [
+        "security_description",
+        "narrative",
+        "language",
+        "{{product_name}}",
+    ]
+
+    # Get all column names
+    all_columns = df.columns.tolist()
+
+    # Separate columns with '{{' and without
+    columns_with_braces = [
+        col for col in all_columns if "{{" in col and col not in first_columns
+    ]
+    columns_without_braces = [
+        col
+        for col in all_columns
+        if "{{" not in col
+        and col not in first_columns
+        and col not in ["q03_t1", "q04_t"]
+    ]
+
+    # Sort the separated columns
+    columns_with_braces.sort()
+    columns_without_braces.sort()
+
+    # Combine all columns in the desired order
+    final_column_order = (
+        first_columns
+        + columns_with_braces
+        + columns_without_braces
+        + ["q03_t1", "q04_t"]
+    )
+
+    # Reorder the dataframe
+    df_sorted = df[final_column_order]
+
+    return df_sorted
+
+
+result_df = sort_columns(result_df)
 
 # Save the final DataFrame to a new Excel file with the date in the filename
-output_file = output_path / f"{current_date}_final_processed_data.xlsx"
+logging.info("Saving final processed data to Excel file.")
+output_file = output_path / f"{DATE}_final_processed_data.xlsx"
 result_df.to_excel(output_file, index=False)
 
-print(f"Final processed data saved to: {output_file}")
+# log results of script contains the processed data from all Excel files
+logging.info("Processed data from all Excel files.")
+logging.info(f"Final dataframe shape: {result_df.shape}")
+logging.info(f"Final processed data saved to: {output_file}")
