@@ -124,6 +124,23 @@ The project consists of several Python scripts that work together to process dat
 
 The auxiliary scripts (`plot_builder.py` and `html_table_generator.py`) are called by the main scripts as needed and do not need to be run separately.
 
+## Customizing Reports and Narratives
+
+The content and language of the reports can be customized by editing the narrative configurations in the following Excel file:
+
+./sfdr_report_generator/excel_books/narratives_tables.xlsx
+
+This file contains the text for different sections of the report and supports multiple narratives (e.g., different languages or report styles). To customize:
+
+1. Open the `narratives_tables.xlsx` file.
+2. Locate the row corresponding to the narrative you want to edit.
+3. Modify the text in the relevant columns to change the content of specific sections in the report.
+4. Save the Excel file after making your changes.
+
+The template builder script (`01_template_builder.py`) will use these updated narratives the next time it runs, incorporating your changes into the generated reports.
+
+**Note**: Always make a backup of the Excel file before making significant changes.
+
 ## Maintenance and Updates
 
 When adding new features or fixing bugs:
