@@ -8,6 +8,7 @@ This tool automates the creation of standardized SFDR post-contractual reports, 
 
 ## Project Structure
 
+'''
 sfdr_report_generator/
 ├── python_scripts/           # Core Python processing scripts
 │   ├── 00_data_preper.py     # Data preparation and processing
@@ -23,7 +24,7 @@ sfdr_report_generator/
 └── final_reports/            # Generated HTML reports
 ├── graphs_plots/         # Generated visualizations
 └── logos_icons/          # Static assets
-
+'''
 
 ## Features
 
