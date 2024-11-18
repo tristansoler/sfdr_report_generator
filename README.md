@@ -1,6 +1,6 @@
 # SFDR Post-Contractual Report Generator
 
-An internal tool for generating Sustainable Finance Disclosure Regulation (SFDR) post-contractual reports. This project is designed for use within SAM's ESG Global team.
+An internal tool for generating Sustainable Finance Disclosure Regulation (SFDR) post-contractual reports. This project is designed for use within the ESG Global team of Santander Asset Management (SAM).
 
 ## Project Overview
 
@@ -120,7 +120,7 @@ The project consists of several Python scripts that work together to process dat
 
 1. Place input Excel files in the `excel_books/aladdin_data/` directory.
 2. Run `00_data_preper.py` to process and prepare the data.
-3. Execute `01_template_builder.py` to generate HTML templates.
+3. Run `01_template_builder.py` to generate HTML templates.
 4. Run `02_report_builder.py` to create the final HTML reports.
 
 The auxiliary scripts (`plot_builder.py` and `html_table_generator.py`) are called by the main scripts as needed and do not need to be run separately.
@@ -159,7 +159,7 @@ The generated post-contractual reports include:
 - Standardized SFDR disclosures
 - Data visualizations for key metrics
 - Formatted tables for investments and sector distributions
-- Responsive HTML layout with company-specific styling
+- Responsive HTML layout with EU guidance-specific styling
 
 ## Internal Use and Sharing
 
