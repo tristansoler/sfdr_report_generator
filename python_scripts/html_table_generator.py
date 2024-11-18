@@ -12,21 +12,19 @@ def generate_html_table(df, table_structure="investment"):
     table_structure : str
         Either 'investment' or 'sector' to determine the table structure
     """
+
+    # Remove the first row
+    df = df.iloc[1:]
+
+    # Format percentage values
+    for col in df.select_dtypes(include=["float64"]).columns:
+        df[col] = df[col].apply(lambda x: f"{x:.2f}%" if pd.notnull(x) else "")
+
     # Generate the initial HTML table
-    html_str = df.to_html(classes="dataframe", index=False)
+    html_str = df.to_html(classes="dataframe", index=False, escape=False)
 
     # Parse the HTML using BeautifulSoup
     soup = BeautifulSoup(html_str, "html.parser")
-
-    # Remove the first th from the header if it exists (in case of an index)
-    header_row = soup.find("thead").find("tr")
-    if header_row.find("th"):
-        header_row.find("th").decompose()
-
-    # Remove the first td from each row in the body if it exists
-    for row in soup.find("tbody").find_all("tr"):
-        if row.find("td"):
-            row.find("td").decompose()
 
     # Define column structure based on table type
     if table_structure == "investment":
