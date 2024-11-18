@@ -1,10 +1,10 @@
 # SFDR Post-Contractual Report Generator
 
-An internal tool for generating Sustainable Finance Disclosure Regulation (SFDR) post-contractual reports. This project is designed for use within our company's ESG Global division and its various geographical units.
+An internal tool for generating Sustainable Finance Disclosure Regulation (SFDR) post-contractual reports. This project is designed for use within SAM's ESG Global team.
 
 ## Project Overview
 
-This tool automates the creation of standardized SFDR post-contractual reports, processing data from internal Excel sources and generating formatted HTML reports with visualizations.
+This tool automates the creation of standardized SFDR post-contractual reports, processing data from Excel and CVS files downloaded from Blackrock's Aladdin Explore and generating formatted HTML reports with visualizations.
 
 ## Project Structure
 
