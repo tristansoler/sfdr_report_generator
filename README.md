@@ -45,6 +45,9 @@ sfdr_report_generator/
 ## Setup and Installation
 
 1. Clone the repository to your local machine or company server.
+
+git clone https://github.com/n740789-am_sangroup/sfdr-report-generator.git
+
 2. Install the required dependencies:
 
 pip install -r requirements.txt
