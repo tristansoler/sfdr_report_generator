@@ -18,6 +18,23 @@ logging.basicConfig(
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
+# add feature ask user for input excel sheet, i.e. language
+# ask input for language (es, en, pt, or  pl) assign to constant
+try:
+    input_language = input("Enter the language code (es, en, pt, or pl): ")
+    # validete input language is a string and is one of the four languages
+    if not isinstance(input_language, str) or input_language not in [
+        "es",
+        "en",
+        "pt",
+        "pl",
+    ]:
+        raise ValueError(
+            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
+        )
+except ValueError as e:
+    print(e)
+    logging.error(e)
 
 # Get the current script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -52,7 +69,7 @@ env = Environment(loader=FileSystemLoader(template_dir))
 # Generate a report for each row
 for index, row in df.iterrows():
     # Determine the template file based on the 'narrative' column
-    template_file = f"{row['narrative']}_narrative_template.html"
+    template_file = f"{row['narrative']}_narrative_template_{input_language}.html"
 
     # Check if the template file exists
     if not os.path.exists(os.path.join(template_dir, template_file)):
@@ -103,7 +120,7 @@ for index, row in df.iterrows():
     modified_html_content = str(soup)
 
     # Generate filename
-    filename = f"{row['{{product_name}}'].replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.html"
+    filename = f"{row['{{product_name}}'].replace(' ', '_').replace(',','')}_{datetime.now().strftime('%Y%m%d')}_{input_language}.html"
 
     # Write the HTML file
     with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
