@@ -1,24 +1,106 @@
+import json
+import os
+from pathlib import Path
+import logging
+
 import pandas as pd
+import numpy as np
 from bs4 import BeautifulSoup
 
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-def generate_html_table(df, table_structure="investment"):
+# ask input for language (es, en, pt, or  pl) assign to constant
+try:
+    input_language = input("Enter the language code (es, en, pt, or pl): ")
+    # validete input language is a string and is one of the four languages
+    if not isinstance(input_language, str) or input_language not in [
+        "es",
+        "en",
+        "pt",
+        "pl",
+    ]:
+        raise ValueError(
+            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
+        )
+except ValueError as e:
+    print(e)
+    logging.error(e)
+
+
+def load_translations():
+    """Load translations from JSON file"""
+    script_dir = Path(__file__).resolve().parent
+    translations_path = script_dir / "translations.json"
+
+    print(f"Attempting to load translations from: {translations_path}")  # Debug print
+
+    if not translations_path.exists():
+        raise FileNotFoundError(f"Translations file not found at {translations_path}")
+
+    with open(translations_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+TRANSLATIONS = load_translations()
+
+
+def translate_text(text, target_language):
     """
-    Generate HTML table without the wrapper div
+    Translate text using the predefined dictionary
+    """
+    if target_language == "en":
+        return text
+    return TRANSLATIONS.get(target_language, {}).get(text, text)
+
+
+def generate_html_table(
+    df, table_structure="investment", target_language=input_language
+):
+    """
+    Generate HTML table without the wrapper div and translate content
 
     Parameters:
     df : pandas DataFrame
         The data to convert to HTML
     table_structure : str
         Either 'investment' or 'sector' to determine the table structure
+    target_language : str
+        The target language code for translation
     """
 
     # Remove the first row
-    df = df.iloc[1:]
+    df = df.iloc[1:].copy()
 
     # Format percentage values
+    def process_percentage(value):
+        if pd.isna(value):
+            return np.nan
+        try:
+            return float(value.strip("%")) / 100
+        except AttributeError:
+            return value
+
+    # Apply this function to your percentage columns
     for col in df.select_dtypes(include=["float64"]).columns:
-        df[col] = df[col].apply(lambda x: f"{x:.2f}%" if pd.notnull(x) else "")
+        df[col] = df[col].apply(process_percentage)
+
+    # Then, when formatting for display
+    df[col] = df[col].apply(lambda x: f"{x:.2%}" if pd.notnull(x) else "")
+
+    # Translate column names
+    df.columns = [translate_text(col, target_language) for col in df.columns]
+
+    # Translate content (except for all-uppercase columns)
+    for col in df.columns:
+        if col.upper() != col:  # Skip columns with all uppercase names
+            df.loc[:, col] = df[col].apply(
+                lambda x: (
+                    translate_text(str(x), target_language) if pd.notnull(x) else x
+                )
+            )
 
     # Generate the initial HTML table
     html_str = df.to_html(classes="dataframe", index=False, escape=False)
@@ -58,13 +140,3 @@ def generate_html_table(df, table_structure="investment"):
     """
 
     return new_table
-
-
-# If running as main script, test the function
-if __name__ == "__main__":
-    # Test data
-    test_df = pd.DataFrame(
-        {"Column1": ["Test1", "Test2"], "Column2": ["Value1", "Value2"]}
-    )
-
-    print(generate_html_table(test_df, "sector"))
