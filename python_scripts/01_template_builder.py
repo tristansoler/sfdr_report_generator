@@ -89,6 +89,95 @@ column_names = [
     "q10sq04_a",
 ]
 
+# choose which columns to translate dependig on the
+if input_language == "es":
+    column_names = column_names
+else:
+    column_names = [
+        "main_heading_text",
+        "product_name",
+        "legal_id",
+        "lei_code",
+        "subheading",
+        "gb001_heading",
+        "gb002_heading",
+        "ob001",
+        "sfdr_last_rep_inv_sust_inv",
+        "q01",
+        "q01_a",
+        "gb003_sq1a",
+        "gb004_sq1a",
+        "q01sq01",
+        "q01sq01_a",
+        "q01sq02",
+        "q01sq02_a",
+        "q01sq03",
+        "q01sq03_a",
+        "q01sq04",
+        "q01sq04_a",
+        "q01sq04sq01",
+        "q01sq04sq01_a",
+        "q01sq04sq02",
+        "q01sq04sq02_a",
+        "ob002",
+        "q02",
+        "q02_a",
+        "q03",
+        "gb005_q03",
+        "q03_a1",
+        "q03_t1",
+        "q04",
+        "q04_a",
+        "gb006_sq4a",
+        "q04sq01",
+        "q04sq01_a",
+        "ob003",
+        "categories_flowchart",
+        "n10000",
+        "n11000",
+        "n12000",
+        "n11100",
+        "n11200",
+        "n11110",
+        "n11120",
+        "q04sq02",
+        "q04sq02_a",
+        "q04_t",
+        "q05",
+        "gb007_q05",
+        "gb008_q05",
+        "gb009_q05",
+        "q05_a",
+        "q05sq01",
+        "q05sq01_chekbox",
+        "ob004",
+        "q05_footnote",
+        "q05sq02",
+        "q05sq02_a",
+        "q05sq03",
+        "q05sq03_a",
+        "q06",
+        "gb010_q06",
+        "q06_a",
+        "q07",
+        "q07_a",
+        "q08",
+        "q08_a",
+        "q09",
+        "q09_a",
+        "q10",
+        "q10_a",
+        "gb011_sq10a",
+        "q10sq01",
+        "q10sq01_a",
+        "q10sq02",
+        "q10sq02_a",
+        "q10sq03",
+        "q10sq03_a",
+        "q10sq04",
+        "q10sq04_a",
+    ]
+
 # Filter the df and select the rows with the narrative == sostenible_fi_eq & narrative == sostenible_fi
 df = df.loc[
     (df["narrative"] == "sostenible_fi_eq") | (df["narrative"] == "sostenible_fi")
@@ -120,7 +209,7 @@ for index, row in df.iterrows():
             )  # Insert the new content safely
 
     # Generate a unique filename for each row
-    output_filename = f"{row['narrative']}_narrative_template{input_language}.html"
+    output_filename = f"{row['narrative']}_narrative_template_{input_language}.html"
     output_path = os.path.join(output_dir, output_filename)
 
     # Save the result to a new HTML file in the specified directory
