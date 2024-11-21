@@ -1,8 +1,32 @@
 import os
+import logging
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+# add feature ask user for input excel sheet, i.e. language
+# ask input for language (es, en, pt, or  pl) assign to constant
+try:
+    input_language = input("Enter the language code (es, en, pt, or pl): ")
+    # validete input language is a string and is one of the four languages
+    if not isinstance(input_language, str) or input_language not in [
+        "es",
+        "en",
+        "pt",
+        "pl",
+    ]:
+        raise ValueError(
+            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
+        )
+except ValueError as e:
+    print(e)
+    logging.error(e)
 
 
 def build_plot(row_data, output_dir, report_id):
@@ -30,6 +54,9 @@ def build_plot(row_data, output_dir, report_id):
                 "nogasnonuclear": row[f"total_opex_nogasnonuclear{suffix}"],
                 "rest": row[f"rest_capex_aligned{suffix}"],
             },
+            "total_investments": {
+                row["portfolio_mv_exsov"] * len(row_data),
+            },
         }
         return pd.DataFrame(data)
 
@@ -37,16 +64,27 @@ def build_plot(row_data, output_dir, report_id):
     data_with_sb = prepare_data(row_data, True)
     data_without_sb = prepare_data(row_data, False)
 
+    # define legend string
+    STRING_TOT_INVESTMENTS = "This graph represents x% of the total investments."
+    # Replace 'x' with the value from df['total_investments']
+    UPDATED_STRING = STRING_TOT_INVESTMENTS.replace(
+        "x", str(data_without_sb["total_investments"][0])
+    )
+
     # Function to create a single chart
     def create_chart(ax, data, title):
-        categories = ["Volumen de\nnegocios", "CapEx", "OpEx"]
+        categories = [
+            "Turnover",
+            "CapEx",
+            "OpEx",
+        ]
         cumulative = np.zeros(len(categories))
         colors = ["#98fb98", "#2e8b57", "#1a472a", "#d3d3d3"]
         labels = [
-            "Taxonomía alineada: gas fósil",
-            "Taxonomía alineada: nuclear",
-            "Taxonomía alineada: (sin gas y nuclear)",
-            "No alineado",
+            "Taxonomy-aligned: Fossil gas",
+            "Taxonomy-aligned: Nuclear",
+            "Taxonomy-aligned (no gas and nuclear)",
+            "Non Taxonomy-aligned",
         ]
 
         bar_height = 0.3  # Adjust this value to change the thickness of the bars
@@ -135,12 +173,12 @@ def build_plot(row_data, output_dir, report_id):
     create_chart(
         ax1,
         data_with_sb,
-        "1. Ajuste a la taxonomía de las inversiones,\nincluidos los bonos soberanos*",
+        title="1. Taxonomy-alignment of investments including sovereign bonds*",
     )
     create_chart(
         ax2,
         data_without_sb,
-        "2. Ajuste a la taxonomía de las inversiones,\nexcluidos los bonos soberanos*",
+        title="2. Taxonomy-alignment of investments excluding sovereign bonds*",
     )
 
     # Add a common legend
