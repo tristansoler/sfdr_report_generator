@@ -120,7 +120,7 @@ for index, row in df.iterrows():
             )  # Insert the new content safely
 
     # Generate a unique filename for each row
-    output_filename = f"{row['narrative']}_narrative_template.html"
+    output_filename = f"{row['narrative']}_narrative_template{input_language}.html"
     output_path = os.path.join(output_dir, output_filename)
 
     # Save the result to a new HTML file in the specified directory
