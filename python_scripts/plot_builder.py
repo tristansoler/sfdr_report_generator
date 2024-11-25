@@ -145,9 +145,11 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         ax.set_yticks(range(len(categories)))
         ax.set_yticklabels(categories[::-1])
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))  # Increased figure width
+        return ax.get_legend_handles_labels()
 
-    create_chart(
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))  # Increased figure size
+
+    handles1, labels1 = create_chart(
         ax1,
         data_with_sb,
         title=translate(
@@ -155,7 +157,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
             input_language,
         ),
     )
-    create_chart(
+    handles2, labels2 = create_chart(
         ax2,
         data_without_sb,
         title=translate(
@@ -164,13 +166,16 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         ),
     )
 
-    handles, labels = ax1.get_legend_handles_labels()
-    fig.legend(
-        handles, labels, loc="lower center", bbox_to_anchor=(0.5, -0.15), ncol=2
+    # Create separate legends for each subplot
+    ax1.legend(
+        handles1, labels1, loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=2
+    )
+    ax2.legend(
+        handles2, labels2, loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=2
     )  # Adjusted legend position and columns
 
     plt.tight_layout()
-    plt.subplots_adjust(bottom=0.2, wspace=0.4)  # Increased space between subplots
+    plt.subplots_adjust(bottom=0.3, wspace=0.4)  # Increased space between subplots
 
     plot_filename = f"plot_{report_id}.png"
     plot_path = os.path.join(output_dir, plot_filename)
