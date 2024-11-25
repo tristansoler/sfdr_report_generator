@@ -1,5 +1,6 @@
 import os
 import logging
+import json
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,11 +11,17 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# add feature ask user for input excel sheet, i.e. language
-# ask input for language (es, en, pt, or  pl) assign to constant
+# Load translations
+with open(
+    r"C:\Users\n740789\Documents\sfdr_report_generator\python_scripts\translations.json",
+    "r",
+    encoding="utf-8",
+) as f:
+    translations = json.load(f)
+
+# Ask for user input for language
 try:
     input_language = input("Enter the language code (es, en, pt, or pl): ")
-    # validete input language is a string and is one of the four languages
     if not isinstance(input_language, str) or input_language not in [
         "es",
         "en",
@@ -29,62 +36,67 @@ except ValueError as e:
     logging.error(e)
 
 
+# Function to translate text
+def translate(text, lang):
+    if lang == "en":
+        return text
+    return translations.get(lang, {}).get(text, text)
+
+
 def build_plot(row_data, output_dir, report_id):
-    # Function to create data for a single chart
     def prepare_data(row, include_sov):
         suffix = "" if include_sov else "_exsovereign"
         data = {
-            "Volumen de\nnegocios": {
+            translate("Turnover", input_language): {
                 "gas": row[f"total_turnover_gas{suffix}"],
                 "nuclear": row[f"total_turnover_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_turnover_nogasnonuclear{suffix}"],
-                "rest": row[
-                    f"rest_turnover_aligned{suffix}"
-                ],  # need to modify "rest", we don't get it anymore
+                "rest": row[f"rest_turnover_aligned{suffix}"],
             },
-            "CapEx": {
+            translate("CapEx", input_language): {
                 "gas": row[f"total_capex_gas{suffix}"],
                 "nuclear": row[f"total_capex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_capex_nogasnonuclear{suffix}"],
                 "rest": row[f"rest_opex_aligned{suffix}"],
             },
-            "OpEx": {
+            translate("OpEx", input_language): {
                 "gas": row[f"total_opex_gas{suffix}"],
                 "nuclear": row[f"total_opex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_opex_nogasnonuclear{suffix}"],
                 "rest": row[f"rest_capex_aligned{suffix}"],
             },
-            "total_investments": {
-                row["portfolio_mv_exsov"] * len(row_data),
-            },
         }
         return pd.DataFrame(data)
 
-    # Prepare data for both charts
     data_with_sb = prepare_data(row_data, True)
     data_without_sb = prepare_data(row_data, False)
 
-    # define legend string
-    STRING_TOT_INVESTMENTS = "This graph represents x% of the total investments."
-    # Replace 'x' with the value from df['total_investments']
-    UPDATED_STRING = STRING_TOT_INVESTMENTS.replace(
-        "x", str(data_without_sb["total_investments"][0])
+    STRING_TOT_INVESTMENTS = translate(
+        "This graph represents x% of the total investments.", input_language
     )
+    # UPDATED_STRING = STRING_TOT_INVESTMENTS.replace(
+    #    "x", str(data_without_sb["total_investments"][0])
+    # )
 
-    # Function to create a single chart
     def create_chart(ax, data, title):
         categories = [
-            "Turnover",
-            "CapEx",
-            "OpEx",
+            translate("Turnover", input_language),
+            translate("CapEx", input_language),
+            translate("OpEx", input_language),
         ]
         cumulative = np.zeros(len(categories))
-        colors = ["#98fb98", "#2e8b57", "#1a472a", "#d3d3d3"]
+        # WE NEED TO CHANGE THE COLORS  SO THEY LOOK MORE LIKE THE EU SAMPLE
+        colors = [
+            "#98fb98",
+            "#2e8b57",
+            "#1a472a",
+            "#d3d3d3",
+        ]
         labels = [
-            "Taxonomy-aligned: Fossil gas",
-            "Taxonomy-aligned: Nuclear",
-            "Taxonomy-aligned (no gas and nuclear)",
-            "Non Taxonomy-aligned",
+            translate("Taxonomy-aligned: Fossil gas", input_language),
+            translate("Taxonomy-aligned: Nuclear", input_language),
+            translate("Taxonomy-aligned (no gas and nuclear)", input_language),
+            translate("Non Taxonomy-aligned", input_language),
         ]
 
         bar_height = 0.3  # Adjust this value to change the thickness of the bars
@@ -102,25 +114,21 @@ def build_plot(row_data, output_dir, report_id):
             cumulative += values
 
         ax.set_xlim(0, 100)
-        ax.set_xlabel("Porcentaje")
+        ax.set_xlabel(translate("Percentage", input_language))
         ax.set_title(title)
 
-        # Remove all spines
         for spine in ax.spines.values():
             spine.set_visible(False)
 
-        # Add percentage labels
         for i, category in enumerate(categories):
             cumsum = 0
             small_values = []
             for j, column in enumerate(["gas", "nuclear", "nogasnonuclear", "rest"]):
                 width = data[category][column]
                 if width > 0:
-                    if width < 10 or (
-                        j == 2 and width < 15
-                    ):  # Condition for small values including 'sin gas y nuclear'
+                    if width < 10 or (j == 2 and width < 15):
                         small_values.append((width, j, cumsum))
-                    else:  # For larger values, keep the annotation inside the bar
+                    else:
                         ax.annotate(
                             f"{width:.2f}%",
                             xy=(cumsum + width / 2, i),
@@ -134,10 +142,8 @@ def build_plot(row_data, output_dir, report_id):
                         )
                 cumsum += width
 
-            # Sort small values from larger to smaller
             small_values.sort(reverse=True)
 
-            # Add annotations for small values
             for idx, (width, j, start) in enumerate(small_values):
                 ax.annotate(
                     f"{width:.2f}%",
@@ -157,50 +163,42 @@ def build_plot(row_data, output_dir, report_id):
                     ),
                 )
 
-        # Adjust y-axis to make room for labels
         ax.set_ylim(-1.5, len(categories) - 0.5)
-
-        # Adjust y-tick labels
         ax.set_yticks(range(len(categories)))
-        ax.set_yticklabels(
-            categories[::-1]
-        )  # Reverse the order to match the desired layout
+        ax.set_yticklabels(categories[::-1])
 
-    # Create the figure and axes
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 6))
 
-    # Create both charts
     create_chart(
         ax1,
         data_with_sb,
-        title="1. Taxonomy-alignment of investments including sovereign bonds*",
+        title=translate(
+            "1. Taxonomy-alignment of investments including sovereign bonds*",
+            input_language,
+        ),
     )
     create_chart(
         ax2,
         data_without_sb,
-        title="2. Taxonomy-alignment of investments excluding sovereign bonds*",
+        title=translate(
+            "2. Taxonomy-alignment of investments excluding sovereign bonds*",
+            input_language,
+        ),
     )
 
-    # Add a common legend
     handles, labels = ax1.get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.5, -0.05), ncol=4)
 
     plt.tight_layout()
     plt.subplots_adjust(bottom=0.2)
 
-    # Save the plot
     plot_filename = f"plot_{report_id}.png"
     plot_path = os.path.join(output_dir, plot_filename)
     plt.savefig(plot_path)
+
+    # logg where the plot was saved
+    logging.info(f"Plot saved to: {plot_path}")
+
     plt.close()
 
     return plot_filename
-
-
-# Example usage (commented out)
-# if __name__ == "__main__":
-#     excel_path = "path/to/your/excel/file.xlsx"
-#     output_dir = "path/to/output/directory"
-#     report_id = "example_report"
-#     plot_filename = build_plot(excel_path, output_dir, report_id)
-#     print(f"Plot saved as: {plot_filename}")
