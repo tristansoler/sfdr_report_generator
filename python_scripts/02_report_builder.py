@@ -1,12 +1,14 @@
 import logging
 import os
 import warnings
+import json
 from datetime import datetime
 
 import pandas as pd
-import plot_builder
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
+
+import plot_builder
 
 # Set up logging
 logging.basicConfig(
@@ -18,7 +20,12 @@ logging.basicConfig(
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-# add feature ask user for input excel sheet, i.e. language
+# Get the current script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Load translations
+with open(os.path.join(script_dir, "translations.json"), "r", encoding="utf-8") as f:
+    translations = json.load(f)
+
 # ask input for language (es, en, pt, or  pl) assign to constant
 try:
     input_language = input("Enter the language code (es, en, pt, or pl): ")
@@ -80,7 +87,9 @@ for index, row in df.iterrows():
     template = env.get_template(template_file)
 
     # Generate the plot
-    plot_filename = plot_builder.build_plot(row, plots_dir, index)
+    plot_filename = plot_builder.build_plot(
+        row, plots_dir, index, translations, input_language
+    )
 
     # Prepare data for the template
     data = {
