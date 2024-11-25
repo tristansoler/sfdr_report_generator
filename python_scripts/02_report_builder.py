@@ -95,7 +95,7 @@ for index, row in df.iterrows():
         "other_nones": row["{{other_nones}}"],
         "ref_period": row["{{ref_period}}"],
         "other_non_sust": row["{{other_non_sust}}"],
-        "plot_path": os.path.join("plots", plot_filename),  # Relative path to the plot
+        # "plot_path": os.path.join("plots", plot_filename),  # Relative path to the plot
     }
 
     # Render the template with the data
@@ -116,11 +116,25 @@ for index, row in df.iterrows():
         q04_t_div.clear()
         q04_t_div.append(BeautifulSoup(row["q04_t"], "html.parser"))
 
+    # Find the div with class "chart"
+    chart_div = soup.find("div", class_="chart")
+    if chart_div:
+        # Find the img tag within the chart div
+        img_tag = chart_div.find("img")
+
+        if img_tag:
+            # Update the src attribute with the new filename
+            img_tag["src"] = f"plots/{plot_filename}"
+        else:
+            print("Image tag not found within the chart div")
+    else:
+        print("Chart div not found")
+
     # Get the modified HTML content
     modified_html_content = str(soup)
 
     # Generate filename
-    filename = f"{row['{{product_name}}'].replace(' ', '_').replace(',','')}_{datetime.now().strftime('%Y%m%d')}_{input_language}.html"
+    filename = f"{datetime.now().strftime('%Y%m%d')}_{row['{{product_name}}'].replace(' ', '_').replace(',','')}_{input_language}.html"
 
     # Write the HTML file
     with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
