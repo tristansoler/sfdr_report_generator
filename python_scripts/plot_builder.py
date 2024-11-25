@@ -1,6 +1,7 @@
-import os
-import logging
 import json
+import logging
+import os
+from textwrap import wrap
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,39 +12,16 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Load translations
-with open(
-    r"C:\Users\n740789\Documents\sfdr_report_generator\python_scripts\translations.json",
-    "r",
-    encoding="utf-8",
-) as f:
-    translations = json.load(f)
 
-# Ask for user input for language
-try:
-    input_language = input("Enter the language code (es, en, pt, or pl): ")
-    if not isinstance(input_language, str) or input_language not in [
-        "es",
-        "en",
-        "pt",
-        "pl",
-    ]:
-        raise ValueError(
-            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
-        )
-except ValueError as e:
-    print(e)
-    logging.error(e)
+def build_plot(row_data, output_dir, report_id, translations, input_language):
+    def translate(text, lang, trans=translations):
+        if lang == "en":
+            return text
+        translated = trans.get(lang, {}).get(text, text)
+        if translated == text:
+            logging.warning(f"No translation found for '{text}' in language '{lang}'")
+        return translated
 
-
-# Function to translate text
-def translate(text, lang):
-    if lang == "en":
-        return text
-    return translations.get(lang, {}).get(text, text)
-
-
-def build_plot(row_data, output_dir, report_id):
     def prepare_data(row, include_sov):
         suffix = "" if include_sov else "_exsovereign"
         data = {
@@ -53,13 +31,13 @@ def build_plot(row_data, output_dir, report_id):
                 "nogasnonuclear": row[f"total_turnover_nogasnonuclear{suffix}"],
                 "rest": row[f"rest_turnover_aligned{suffix}"],
             },
-            translate("CapEx", input_language): {
+            "CapEx": {
                 "gas": row[f"total_capex_gas{suffix}"],
                 "nuclear": row[f"total_capex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_capex_nogasnonuclear{suffix}"],
                 "rest": row[f"rest_opex_aligned{suffix}"],
             },
-            translate("OpEx", input_language): {
+            "OpEx": {
                 "gas": row[f"total_opex_gas{suffix}"],
                 "nuclear": row[f"total_opex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_opex_nogasnonuclear{suffix}"],
@@ -74,15 +52,13 @@ def build_plot(row_data, output_dir, report_id):
     STRING_TOT_INVESTMENTS = translate(
         "This graph represents x% of the total investments.", input_language
     )
-    # UPDATED_STRING = STRING_TOT_INVESTMENTS.replace(
-    #    "x", str(data_without_sb["total_investments"][0])
-    # )
+    # UPDATED_STRING = STRING_TOT_INVESTMENTS.replace("x", str(data_without_sb["total_investments"][0]))
 
     def create_chart(ax, data, title):
         categories = [
             translate("Turnover", input_language),
-            translate("CapEx", input_language),
-            translate("OpEx", input_language),
+            "CapEx",
+            "OpEx",
         ]
         cumulative = np.zeros(len(categories))
         # WE NEED TO CHANGE THE COLORS  SO THEY LOOK MORE LIKE THE EU SAMPLE
@@ -115,7 +91,9 @@ def build_plot(row_data, output_dir, report_id):
 
         ax.set_xlim(0, 100)
         ax.set_xlabel(translate("Percentage", input_language))
-        ax.set_title(title)
+        # Wrap title text
+        wrapped_title = "\n".join(wrap(title, width=40))
+        ax.set_title(wrapped_title, fontsize=10, wrap=True)
 
         for spine in ax.spines.values():
             spine.set_visible(False)
@@ -167,7 +145,7 @@ def build_plot(row_data, output_dir, report_id):
         ax.set_yticks(range(len(categories)))
         ax.set_yticklabels(categories[::-1])
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 6))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))  # Increased figure width
 
     create_chart(
         ax1,
@@ -187,14 +165,18 @@ def build_plot(row_data, output_dir, report_id):
     )
 
     handles, labels = ax1.get_legend_handles_labels()
-    fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.5, -0.05), ncol=4)
+    fig.legend(
+        handles, labels, loc="lower center", bbox_to_anchor=(0.5, -0.15), ncol=2
+    )  # Adjusted legend position and columns
 
     plt.tight_layout()
-    plt.subplots_adjust(bottom=0.2)
+    plt.subplots_adjust(bottom=0.2, wspace=0.4)  # Increased space between subplots
 
     plot_filename = f"plot_{report_id}.png"
     plot_path = os.path.join(output_dir, plot_filename)
-    plt.savefig(plot_path)
+    plt.savefig(
+        plot_path, bbox_inches="tight", dpi=300
+    )  # Increased DPI for better quality
 
     # logg where the plot was saved
     logging.info(f"Plot saved to: {plot_path}")
