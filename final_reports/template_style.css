@@ -327,10 +327,10 @@ strong {
 }
 /*TABLE STYLES*/
 :root {
-    --col1-width: 30%;
-    --col2-width: 37.5%; /* Decreased from 40% to give more space to the fourth column */
-    --col3-width: 15%;   /* Increased from 12.5% to give more space to the fourth column */
-    --col4-width: 17.5%; /* Increased from 12.5% to give more space to the fourth column */
+    --col1-width: 35%;   /* Increased from 30% */
+    --col2-width: 32.5%; /* Decreased from 40% */
+    --col3-width: 15%;   /* Increased from 12.5% */
+    --col4-width: 17.5%; /* Increased from 12.5% */
 }
 .table-body {
     font-family: Arial, sans-serif;
