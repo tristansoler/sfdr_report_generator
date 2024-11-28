@@ -22,6 +22,15 @@ logging.basicConfig(
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 
+# define a ticker function
+def ticker(input_array: list) -> str:
+    return "X" if np.any(np.nan_to_num(input_array) > 0) else ""
+
+
+def ticker_opposite(input_array: list) -> str:
+    return "X" if np.all(np.nan_to_num(input_array) == 0) else ""
+
+
 # Get the current script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Load translations
@@ -114,14 +123,6 @@ for index, row in df.iterrows():
     # Use BeautifulSoup to modify the HTML content
     soup = BeautifulSoup(html_content, "html.parser")
 
-    # define a ticker function
-    def ticker(input_array: list) -> str:
-        return "X" if np.any(np.nan_to_num(input_array) > 0) else ""
-
-    # define ticker opposite function
-    def ticker_opposite(input_array: list) -> str:
-        return "X" if np.any(np.nan_to_num(input_array) == 0) else ""
-
     # Prep variables to tick the checkboxes of the report using the ticker function
     # in the future we will change this to a more complex function
     article_8 = ticker([1])
@@ -141,65 +142,91 @@ for index, row in df.iterrows():
     # Update the checkboxes in the report
     # Let's update article 9 Check boxes
     checkbox_art9_00 = soup.find(id="cb_art9_00")
-    checkbox_art9_00 = article_9
+    if checkbox_art9_00:
+        checkbox_art9_00.string = article_9
+
     checkbox_art9_01 = soup.find(id="cb_art9_01")
-    checkbox_art9_01 = ticker([0])
+    if checkbox_art9_01:
+        checkbox_art9_01.string = ticker([0])
     checkbox_art9_02 = soup.find(id="cb_art9_02")
-    checkbox_art9_02 = ticker([0])
+    if checkbox_art9_02:
+        checkbox_art9_02.string = ticker([0])
+
     checkbox_art9_03 = soup.find(id="cb_art9_03")
-    checkbox_art9_03 = ticker([0])
+    if checkbox_art9_03:
+        checkbox_art9_03.string = ticker([0])
+
     checkbox_art9_04 = soup.find(id="cb_art9_04")
-    checkbox_art9_04 = ticker([0])
+    if checkbox_art9_04:
+        checkbox_art9_04.string = ticker([0])
 
     # Let's update article 8 Check boxes
     checkbox_art8_00 = soup.find(id="cb_art8_00")
-    checkbox_art8_00 = article_8
-    checkbox_art8_01 = soup.find(id="cb_art8_01")
+    if checkbox_art8_00:
+        checkbox_art8_00.string = article_8
+
     #   did promote environmental or social characteristics
-    checkbox_art8_01 = ticker([sust_invest])
-    checkbox_art8_02 = soup.find(id="cb_art8_02")
+    checkbox_art8_01 = soup.find(id="cb_art8_01")
+    if checkbox_art8_01:
+        checkbox_art8_01.string = ticker([sust_invest])
+
     #   did promote environmental characteristics
-    checkbox_art8_02 = ticker([sust_invest_env])
-    checkbox_art8_03 = soup.find(id="cb_art8_03")
+    checkbox_art8_02 = soup.find(id="cb_art8_02")
+    if checkbox_art8_02:
+        checkbox_art8_02.string = ticker([sust_invest_env])
+
     #   did promote social characteristics
-    checkbox_art8_03 = ticker([sust_invest_soc])
-    checkbox_art8_04 = soup.find(id="cb_art8_04")
+    checkbox_art8_03 = soup.find(id="cb_art8_03")
+    if checkbox_art8_03:
+        checkbox_art8_03.string = ticker([sust_invest_soc])
+
     #   did promote environmental or social characteristics but made no sustainable investments
-    checkbox_art8_04 = ticker_opposite([sust_invest])
+    checkbox_art8_04 = soup.find(id="cb_art8_04")
+    if checkbox_art8_04:
+        checkbox_art8_04.string = ticker_opposite([sust_invest])
 
     # Let's update checkboxes of the suquestion 1 of question 5 id q05sq01
     #   did invest in activities related to nuclear energy or fossil gas
     checkbox_q5_001 = soup.find(id="cb_q5_001")
-    checkbox_q5_001 = ticker(
-        [
-            total_turnover_nuclear,
-            total_capex_nuclear,
-            total_opex_nuclear,
-            total_turnover_gas,
-            total_capex_gas,
-            total_opex_gas,
-        ]
-    )
+    if checkbox_q5_001:
+        checkbox_q5_001.string = ticker(
+            [
+                total_turnover_nuclear,
+                total_capex_nuclear,
+                total_opex_nuclear,
+                total_turnover_gas,
+                total_capex_gas,
+                total_opex_gas,
+            ]
+        )
+
     #  did not invest in activities related to nuclear energy or fosil gas
     checkbox_q5_002 = soup.find(id="cb_q5_002")
-    checkbox_q5_002 = ticker_opposite(
-        [
-            total_turnover_nuclear,
-            total_capex_nuclear,
-            total_opex_nuclear,
-            total_turnover_gas,
-            total_capex_gas,
-            total_opex_gas,
-        ]
-    )
+    if checkbox_q5_002:
+        checkbox_q5_002.string = ticker_opposite(
+            [
+                total_turnover_nuclear,
+                total_capex_nuclear,
+                total_opex_nuclear,
+                total_turnover_gas,
+                total_capex_gas,
+                total_opex_gas,
+            ]
+        )
+
     #  yes, in fossil gas
     checkbox_q5_003 = soup.find(id="cb_q5_003")
-    checkbox_q5_003 = ticker([total_turnover_gas, total_capex_gas, total_opex_gas])
+    if checkbox_q5_003:
+        checkbox_q5_003.string = ticker(
+            [total_turnover_gas, total_capex_gas, total_opex_gas]
+        )
+
     #  yes, in nuclear energy
     checkbox_q5_004 = soup.find(id="cb_q5_004")
-    checkbox_q5_004 = ticker(
-        [total_turnover_nuclear, total_capex_nuclear, total_opex_nuclear]
-    )
+    if checkbox_q5_004:
+        checkbox_q5_004.string = ticker(
+            [total_turnover_nuclear, total_capex_nuclear, total_opex_nuclear]
+        )
 
     # Update top investments table: div with id "q03_t1"
     q03_t1_div = soup.find("div", id="q03_t1")
