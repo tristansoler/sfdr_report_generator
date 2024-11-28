@@ -17,19 +17,19 @@
         <!--Heading Section-->
         <div class="heading">
           <p class="main-heading" id="main_heading_text">
-            <strong
+            <b
               >Plantilla de información periódica de los productos financieros a
               que se refiere el artículo 8, apartados 1, 2 y 2 bis, del
               Reglamento (UE) 2019/2088 y el artículo 6, párrafo primero, del
-              Reglamento (UE) 2020/852</strong
+              Reglamento (UE) 2020/852</b
             >
           </p>
           <p class="product-name">
-            <strong>Nombre del producto:</strong>
+            <b>Nombre del producto:</b>
             <span id="product_name">SANTANDER ASG RENTA FIJA, PPSI</span>
           </p>
           <p class="legal-id" id="legal_id">
-            <strong>Identificador de entidad jurídica:</strong> Código LEI
+            <b>Identificador de entidad jurídica:</b> Código LEI
             <span id="lei_code">95980020140005598823.</span>
           </p>
           <p class="legal-text" id="legal_text">
@@ -45,22 +45,20 @@
         <div class="gray-boxes">
           <div class="gray-box" id="gb001_heading">
             <p>
-              <strong>Inversión sostenible </strong> significa una inversión en
-              una actividad económica que contribuye a un objetivo
-              medioambiental o social, siempre que la inversión no cause un
-              perjuicio significativo a ningún objetivo medioambiental o social
-              y que las empresas en las que se invierte sigan prácticas de buena
+              <b>Inversión sostenible </b> significa una inversión en una
+              actividad económica que contribuye a un objetivo medioambiental o
+              social, siempre que la inversión no cause un perjuicio
+              significativo a ningún objetivo medioambiental o social y que las
+              empresas en las que se invierte sigan prácticas de buena
               gobernanza.
             </p>
           </div>
           <div class="gray-box" id="gb002_heading">
             <p>
-              La <strong>taxonomía de la UE</strong> es un sistema de
-              clasificación previsto en el Reglamento (UE) 2020/852 por el que
-              se establece una lista de
-              <strong
-                >actividades económicas medioambientalmente sostenibles.</strong
-              >
+              La <b>taxonomía de la UE</b> es un sistema de clasificación
+              previsto en el Reglamento (UE) 2020/852 por el que se establece
+              una lista de
+              <b>actividades económicas medioambientalmente sostenibles.</b>
               Dicho Reglamento no incluye una lista de actividades económicas
               socialmente sostenibles. Las inversiones sostenibles con un
               objetivo medioambiental pueden ajustarse, o no, a la taxonomía.
@@ -82,7 +80,8 @@
                   <div class="ob-dot green"></div>
                   <div class="ob-dot green"></div>
                 </div>
-                <div class="ob-checkbox"></div>
+                <!-- add id to the div -->
+                <div class="ob-checkbox" id="cb_art9_00"></div>
                 <span class="ob-item-text">Sí</span>
               </div>
               <div class="ob-option">
@@ -90,7 +89,8 @@
                   <div class="ob-dot green"></div>
                   <div class="ob-dot white"></div>
                 </div>
-                <div class="ob-checkbox">X</div>
+                <!-- add id to the div -->
+                <div class="ob-checkbox" id="cb_art8_00">X</div>
                 <span class="ob-item-text">No</span>
               </div>
             </div>
@@ -99,16 +99,17 @@
             <div class="ob-columns">
               <div>
                 <div class="ob-item">
-                  <div class="ob-checkbox"></div>
+                  <!-- add id to the div art9-->
+                  <div class="ob-checkbox" id="cb_art9_01"></div>
                   <span class="ob-item-text"
-                    ><strong
+                    ><b
                       >Realizó inversiones sostenibles con un objetivo
-                      medioambiental:</strong
+                      medioambiental:</b
                     ></span
                   >
                 </div>
                 <div class="ob-item ob-sub-item">
-                  <div class="ob-checkbox"></div>
+                  <div class="ob-checkbox" id="cb_art9_02"></div>
                   <span class="ob-item-text"
                     >en actividades económicas que se consideran
                     medioambientalmente sostenibles con arreglo a la taxonomía
@@ -116,7 +117,7 @@
                   >
                 </div>
                 <div class="ob-item ob-sub-item">
-                  <div class="ob-checkbox"></div>
+                  <div class="ob-checkbox" id="cb_art9_03"></div>
                   <span class="ob-item-text"
                     >en actividades económicas que no se consideran
                     medioambientalmente sostenibles con arreglo a la taxonomía
@@ -124,23 +125,21 @@
                   >
                 </div>
                 <div class="ob-item">
-                  <div class="ob-checkbox"></div>
+                  <div class="ob-checkbox" id="cb_art9_04"></div>
                   <span class="ob-item-text"
-                    ><strong
+                    ><b
                       >Realizó inversiones sostenibles con un objetivo
-                      social:</strong
+                      social:</b
                     ></span
                   >
                 </div>
               </div>
               <div>
                 <div class="ob-item">
-                  <div class="ob-checkbox">X</div>
+                  <!-- add id to the div  X if sust_invest > 0 -->
+                  <div class="ob-checkbox" id="cb_art8_01">X</div>
                   <span class="ob-item-text"
-                    ><strong
-                      >Promovió características medioambientales o
-                      sociales</strong
-                    >
+                    ><b>Promovió características medioambientales o sociales</b>
                     y, aunque no tenía como objetivo una inversión sostenible,
                     tuvo un porcentaje del
                     <span id="sfdr_last_rep_inv_sust_inv">4,12</span>% de
@@ -148,7 +147,8 @@
                   >
                 </div>
                 <div class="ob-item ob-sub-item">
-                  <div class="ob-checkbox"></div>
+                  <!-- add id to the div "always" empty-->
+                  <div class="ob-checkbox" id="cb_art8_sost"></div>
                   <span class="ob-item-text"
                     >con un objetivo medioambiental en actividades económicas
                     que se consideran medioambientalmente sostenibles con
@@ -156,7 +156,8 @@
                   >
                 </div>
                 <div class="ob-item ob-sub-item">
-                  <div class="ob-checkbox">X</div>
+                  <!-- add id to the div  X if sust_invest_env > 0 -->
+                  <div class="ob-checkbox" id="cb_art8_02">X</div>
                   <span class="ob-item-text"
                     >con un objetivo medioambiental en actividades económicas
                     que no se consideran medioambientalmente sostenibles con
@@ -164,15 +165,15 @@
                   >
                 </div>
                 <div class="ob-item ob-sub-item">
-                  <div class="ob-checkbox">X</div>
+                  <!-- add id to the div  X if sust_invest_soc > 0 -->
+                  <div class="ob-checkbox" id="cb_art8_03">X</div>
                   <span class="ob-item-text">con un objetivo social</span>
                 </div>
                 <div class="ob-item">
-                  <div class="ob-checkbox"></div>
+                  <!-- add id to the div  X if sust_invest = 0 | null -->
+                  <div class="ob-checkbox" id="cb_art8_04"></div>
                   <span class="ob-item-text"
-                    ><strong
-                      >Promovió características medioambientales o
-                      sociales</strong
+                    ><b>Promovió características medioambientales o sociales</b
                     >, pero no realizó ninguna inversión sostenible</span
                   >
                 </div>
@@ -266,9 +267,9 @@
         <div class="gray-boxes">
           <div class="gray-box" id="gb003_sq1a">
             <p>
-              Los <strong>indicadores de sostenibilidad</strong> miden cómo se
-              alcanzan las características medioambientales o sociales que
-              promueve el producto financiero.
+              Los <b>indicadores de sostenibilidad</b> miden cómo se alcanzan
+              las características medioambientales o sociales que promueve el
+              producto financiero.
             </p>
           </div>
         </div>
@@ -287,8 +288,8 @@
           </p>
           <ul>
             <li>
-              <strong>Indicador de exclusiones:</strong> El Plan de Previsión no
-              ha realizado ninguna inversión en sectores no permitidos por la
+              <b>Indicador de exclusiones:</b> El Plan de Previsión no ha
+              realizado ninguna inversión en sectores no permitidos por la
               política de inversión del mismo de acuerdo con el procedimiento
               interno de la Entidad contratada para la gestión de activos de la
               EPSV. Es decir, el Plan de Previsión no tuvo exposición a emisores
@@ -301,15 +302,12 @@
               derechos políticos y libertades sociales.
             </li>
             <li>
-              <strong>Indicador de controversias:</strong> El Plan de Previsión
-              ha tenido una exposición del 0% a emisores involucrados en
-              controversias consideradas críticas.
+              <b>Indicador de controversias:</b> El Plan de Previsión ha tenido
+              una exposición del 0% a emisores involucrados en controversias
+              consideradas críticas.
             </li>
             <li>
-              <strong
-                >Calificación/Rating ASG mínimo medio del Plan de
-                Previsión:</strong
-              >
+              <b>Calificación/Rating ASG mínimo medio del Plan de Previsión:</b>
               La calificación ASG promedio de los activos con rating de la
               cartera de inversión directa de contado e IIC según la metodología
               interna de la Entidad contratada para la gestión de activos de la
@@ -323,8 +321,8 @@
             <li>
               El porcentaje medio de activos subyacentes del Plan de Previsión
               alineados con características medioambientales y sociales
-              promovidas fue del <strong>94,41%</strong> a lo largo del periodo
-              de referencia.
+              promovidas fue del <b>94,41%</b> a lo largo del periodo de
+              referencia.
             </li>
           </ul>
         </div>
@@ -453,11 +451,11 @@
         <div class="gray-boxes">
           <div class="gray-box" id="gb004_sq1a">
             <p>
-              Las <strong>principales incidencias adversas</strong> son las
-              incidencias negativas más importantes de las decisiones de
-              inversión sobre los factores de sostenibilidad relativos a asuntos
-              medioambientales, sociales y laborales, al respeto de los derechos
-              humanos y a cuestiones de lucha contra la corrupción y el soborno.
+              Las <b>principales incidencias adversas</b> son las incidencias
+              negativas más importantes de las decisiones de inversión sobre los
+              factores de sostenibilidad relativos a asuntos medioambientales,
+              sociales y laborales, al respeto de los derechos humanos y a
+              cuestiones de lucha contra la corrupción y el soborno.
             </p>
           </div>
         </div>
@@ -697,7 +695,7 @@
           <div class="gray-box" id="gb005_q03">
             <p>
               La lista incluye las inversiones que constituyen
-              <strong>la mayor parte de las inversiones</strong>
+              <b>la mayor parte de las inversiones</b>
               del producto financiero durante el período de referencia, que es:
               31/12/2022 - 29/12/2023
             </p>
@@ -874,8 +872,8 @@
         <div class="gray-boxes">
           <div class="gray-box" id="gb006_sq4a">
             <p>
-              La <strong>asignación de activos</strong> describe el porcentaje
-              de inversiones en activos específicos.
+              La <b>asignación de activos</b> describe el porcentaje de
+              inversiones en activos específicos.
             </p>
           </div>
         </div>
@@ -1070,16 +1068,16 @@
             </p>
 
             <p>
-              Las <strong>actividades facilitadoras</strong> permiten de forma
-              directa que otras actividades contribuyan significativamente a un
-              objetivo medioambiental.
+              Las <b>actividades facilitadoras</b> permiten de forma directa que
+              otras actividades contribuyan significativamente a un objetivo
+              medioambiental.
             </p>
             <p>
-              Las <strong>actividades de transición son</strong> actividades
-              para las que todavía no se dispone de alternativas con bajas
-              emisiones de carbono y que, entre otras cosas, tienen niveles de
-              emisión de gases de efecto invernadero que se corresponden con los
-              mejores resultados.
+              Las <b>actividades de transición son</b> actividades para las que
+              todavía no se dispone de alternativas con bajas emisiones de
+              carbono y que, entre otras cosas, tienen niveles de emisión de
+              gases de efecto invernadero que se corresponden con los mejores
+              resultados.
             </p>
           </div>
           <div class="gray-box" id="gb009_q05">
@@ -1088,20 +1086,19 @@
               porcentaje de:
             </p>
             <p>
-              - El <strong>volumen de negocios</strong>, que refleja el
-              porcentaje de ingresos procendentes de actividades ecológicas de
-              las empresas en las que se invierte.
+              - El <b>volumen de negocios</b>, que refleja el porcentaje de
+              ingresos procendentes de actividades ecológicas de las empresas en
+              las que se invierte.
             </p>
             <p>
-              - La <strong>inversión en activo fijo</strong> (CapEx), que
-              muestra las inversiones ecológicas realizadas por las empresas en
-              las que se invierte, por ejemplo, para la transición a una
-              economía verde.
+              - La <b>inversión en activo fijo</b> (CapEx), que muestra las
+              inversiones ecológicas realizadas por las empresas en las que se
+              invierte, por ejemplo, para la transición a una economía verde.
             </p>
             <p>
-              - Los <strong>gastos de explotación</strong> (OpEx), que reflejan
-              las actividades operativas ecológicas de las empresas en las que
-              se invierte.
+              - Los <b>gastos de explotación</b> (OpEx), que reflejan las
+              actividades operativas ecológicas de las empresas en las que se
+              invierte.
             </p>
           </div>
         </div>
@@ -1128,24 +1125,24 @@
         <!--Checkbox Answer Subquestion 5a-->
         <div class="q5-checkbox-group" id="q05sq01_chekbox">
           <label>
-            <input type="checkbox" />
-            <span>Sí:</span>
+            <div class="ob-checkbox" id="cb_q5_001">X</div>
+            <span id="cb_q5_001_text">Sí:</span>
           </label>
           <div class="q5-nested-checkboxes">
             <label>
-              <input style="margin-left: 50px" type="checkbox" />
-              <span>En el gas fósil</span>
+              <div class="ob-checkbox" id="cb_q5_003"></div>
+              <span id="cb_q5_003_text">En el gas fósil</span>
             </label>
             <label>
-              <input type="checkbox" />
-              <span>En la energía nuclear</span>
+              <div class="ob-checkbox" id="cb_q5_004"></div>
+              <span id="cb_q5_004_text">En la energía nuclear</span>
             </label>
           </div>
         </div>
         <div class="q5-checkbox-group" id="q05sq01_chekbox">
           <label>
-            <input type="checkbox" />
-            <span>No</span>
+            <div class="ob-checkbox" id="cb_q5_002"></div>
+            <span id="cb_q5_002_text">No</span>
           </label>
         </div>
         <!-- Footnote Subquestion 5a-->
@@ -1169,7 +1166,7 @@
         <div class="obr-container" id="ob004">
           <div class="obr-content">
             <p style="font-style: italic">
-              <strong>
+              <b>
                 Los gráficos que figuran a continuación muestran en verde el
                 porcentaje de inversiones que se ajustaban a la taxonomía de la
                 UE. Dado que no existe una metodología adecuada para determinar
@@ -1178,8 +1175,7 @@
                 todas las inversiones del producto financiero, incluidos los
                 bonos soberanos, mientras que el segundo gráfico muestra la
                 adaptación a la taxonomía solo en relación con las inversiones
-                del producto financiero distintas de los bonos
-                soberanos.</strong
+                del producto financiero distintas de los bonos soberanos.</b
               >
             </p>
             <!--Add graph image-->
@@ -1253,9 +1249,9 @@
             />
             <p style="margin-top: -2px">
               son inversiones sostenibles con un objetivo medioambiental que
-              <strong>no tienen en cuenta los criterios</strong> para las
-              actividades económicas medioambientalmente sostenibles con arreglo
-              al Reglamento (UE) 2020/852.
+              <b>no tienen en cuenta los criterios</b> para las actividades
+              económicas medioambientalmente sostenibles con arreglo al
+              Reglamento (UE) 2020/852.
             </p>
           </div>
         </div>
@@ -1530,9 +1526,9 @@
         <div class="gray-boxes">
           <div class="gray-box" id="gb011_sq10a">
             <p>
-              Los <strong>índices de referencia</strong> son índices para medir
-              si el producto financiero logra las características
-              medioambientales o sociales que promueve.
+              Los <b>índices de referencia</b> son índices para medir si el
+              producto financiero logra las características medioambientales o
+              sociales que promueve.
             </p>
           </div>
         </div>
