@@ -1,5 +1,6 @@
 {
   "es": {
+    "Product Name": "Nombre del producto",
     "1. Taxonomy-alignment of investments including sovereign bonds*": "1. Ajuste a la taxonomía de las inversiones, incluidos los bonos soberanos*",
     "Turnover": "Volumen de \nnegocios",
     "CapEx": "CapEx",
@@ -189,6 +190,7 @@
     "Water & Related Utilities": "Servicios de Agua y Relacionados"
   },
   "pt": {
+    "Product Name": "Nome do Produto",
     "1. Taxonomy-alignment of investments including sovereign bonds*": "1. Investimentos alinhados com a taxonomia, incluindo as obrigações soberanas*",
     "Turnover": "Volume de \nnegócios",
     "CapEx": "CapEx",
@@ -384,6 +386,7 @@
     "Water & Related Utilities": "Serviços de Água e Relacionados"
   },
   "pl": {
+    "Product Name": "Nazwa Produktu",
     "1. Taxonomy-alignment of investments including sovereign bonds*": "1. Zgodność inwestycji z systematyką (w tym obligacje skarbowe*)",
     "Turnover": "Obrót",
     "CapEx": "CapEx",
