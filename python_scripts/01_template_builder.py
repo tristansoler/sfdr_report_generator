@@ -96,6 +96,7 @@ else:
     column_names = [
         "main_heading_text",
         "product_name",
+        "product_name_label",
         "legal_id",
         "lei_code",
         "subheading",
