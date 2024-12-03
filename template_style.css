@@ -262,8 +262,8 @@ body {
 }
 .sub-sub-question {
     font-style: italic;
-    margin-top: 15pt;
-    margin-bottom: 10pt;
+    margin-top: 20pt; /* increased 5pt from 15pt */
+    margin-bottom: 15pt; /* increased 5pt from 10pt */
     padding-right: 40pt;
     box-sizing: border-box;
     word-wrap: break-word;
