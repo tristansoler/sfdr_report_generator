@@ -123,7 +123,7 @@ body {
 
 /* Orange Box styles */
 .ob-header {
-    background-color: #FFDAB9;
+    background-color: #f7d1ac;
     padding: 5px;
 }
 .ob-header h2 {
@@ -134,13 +134,26 @@ body {
 .ob-options {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
+    width: 100%;
+    padding-left: 5px;
+    padding-bottom: 3px;
 }
 .ob-option {
     display: flex;
     align-items: center;
+    flex: 1;
+    min-width: 200px; /* Adjust this value based on your needs */
 }
+
+.ob-option.left {
+    justify-content: flex-start;
+}
+
+.ob-option.center {
+    justify-content: center;
+}
+
 .ob-dots {
     display: flex;
     margin-right: 8px;
@@ -152,8 +165,8 @@ body {
     margin-right: 2px;
 }
 .ob-dot.green {
-    background-color: #32CD32;
-    border: 1px #32CD32;
+    background-color: #66ac60;
+    border: 1px #66ac60;
 }
 .ob-dot.white {
     background-color: white;
@@ -171,7 +184,7 @@ body {
     flex-shrink: 0;
 }
 .ob-body {
-    background-color: #FFE4B5;
+    background-color: #fae8d4;
     padding: 20px;
 }
 .ob-columns {
@@ -300,7 +313,7 @@ strong {
 }
 /* regular orange box styles */
 .obr-container {
-    background-color: #FFE4B5;
+    background-color: #f7d1ac;
     max-width: 640pt;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-top: 7pt;
