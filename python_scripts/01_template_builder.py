@@ -198,7 +198,9 @@ else:
 
 # Filter the df and select the rows with the narrative == sostenible_fi_eq & narrative == sostenible_fi
 df = df.loc[
-    (df["narrative"] == "sostenible_fi_eq") | (df["narrative"] == "sostenible_fi")
+    (df["narrative"] == "sostenible_fi_eq")
+    | (df["narrative"] == "sostenible_fi")
+    | (df["narrative"] == "art8_spshares_10")
 ]
 
 # Process each row of the filtered DataFrame
