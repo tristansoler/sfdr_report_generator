@@ -16,9 +16,9 @@
     "Largest Investments": "Inversiones más importantes",
     "Sector": "Sector",
     "% Assets": "% de activos",
-    "Country Name": "País",
+    "Country": "País",
     "Security Description": "Sector económico",
-    "Market Value %": "Asignación de activos en %",
+    "% market value": "Asignación de activos en %",
 
     "Academic & Educational Services": "Servicios Académicos y Educativos",
     "Basic Materials": "Materiales Básicos",
@@ -205,10 +205,10 @@
 
     "Largest Investments": "Maiores Investimentos",
     "Sector": "Setor",
-    "% Assets": "% Ativos",
-    "Country Name": "Nome do País",
+    "% Assets": "% de ativos",
+    "Country": "País",
     "Security Description": "Descrição do Título",
-    "Market Value %": "% Valor de Mercado",
+    "% market value": "% Valor de Mercado",
 
     "Academic & Educational Services": "Serviços Acadêmicos e Educacionais",
     "Basic Materials": "Materiais Básicos",
@@ -402,9 +402,9 @@
     "Largest Investments": "Największe Inwestycje",
     "Sector": "Sektor",
     "% Assets": "% Aktywów",
-    "Country Name": "Nazwa Kraju",
+    "Country": "Nazwa Kraju",
     "Security Description": "Opis Papieru Wartościowego",
-    "Market Value %": "% Wartości Rynkowej",
+    "% market value": "% Wartości Rynkowej",
 
     "Argentina": "Argentyna",
     "Australia": "Australia",
