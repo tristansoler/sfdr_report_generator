@@ -1,12 +1,21 @@
 #!/bin/bash
 
+# Function to check if running in a virtual environment
+in_virtualenv() {
+    # Check if VIRTUAL_ENV is set and not empty
+    [ -n "$VIRTUAL_ENV" ]
+}
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
 # Determine the correct Python command
-if command_exists python3; then
+if in_virtualenv; then
+    echo "Running in virtual environment: $VIRTUAL_ENV"
+    PYTHON_CMD="python"  # In venv, python is already the correct version
+elif command_exists python3; then
     PYTHON_CMD="python3"
 elif command_exists python; then
     PYTHON_CMD="python"
@@ -32,7 +41,7 @@ SCRIPTS=(
 
 # Run Python scripts in sequence, passing the target language as a parameter if provided
 for script in "${SCRIPTS[@]}"; do
-    echo "Running $script"
+    echo "Running $script with $PYTHON_CMD"
     if [ -n "$LANGUAGE" ]; then
         $PYTHON_CMD "$script" "$LANGUAGE"
     else
