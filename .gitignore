@@ -26,6 +26,12 @@ excel_books/
 # ignore txt_files directory
 txt_files/
 
-# Python bytecode files
+# Python bytecode files 
 *.pyc
 __pycache__/
+
+# ignore delte_html_tester.html
+delete_html_tester.html
+
+# Log files
+*.log
