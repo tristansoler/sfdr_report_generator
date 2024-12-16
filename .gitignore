@@ -1,2 +1,31 @@
 ASG EPSV 5_webversion.html.venv/
+
+# ignore virtuan enviroment
 .venv/
+
+# Ignore all files inside the final_reports directory
+final_reports/
+
+# But don't ignore non-HTML files in final_reports and plots
+!final_reports/*
+final_reports/*.html
+final_reports/plots
+
+# ignore temp processed data
+final_processed_data/
+
+# ignore temp narrative templates
+narrative_templates/
+!narrative_templates/*
+narrative_templates/*.html
+
+# ignore excel_books data except narratives_tables
+excel_books/
+!excel_books/narratives_tables.xlsx
+
+# ignore txt_files directory
+txt_files/
+
+# Python bytecode files
+*.pyc
+__pycache__/
