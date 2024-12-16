@@ -35,3 +35,7 @@ delete_html_tester.html
 
 # Log files
 *.log
+
+
+# ignore the explore_data.ipynb file
+explore_data.ipynb
