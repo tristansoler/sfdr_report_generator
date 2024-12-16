@@ -541,3 +541,27 @@ td:nth-child(2) { /*add 5px left padding to second column*/
 .footnote-container {
     page-break-inside: avoid;
 }
+
+/* Print styles */
+@media print {
+    .footnote-container {
+        position: running(footnote);
+    }
+    
+    @page {
+        @bottom-center {
+            content: element(footnote);
+        }
+    }
+    
+    /* Add margin to the last content element to prevent overlap */
+    .answer-text:last-of-type {
+        margin-bottom: 450px; /* Adjust this value based on your footnote height */
+    }
+    
+    /*prevent the flowchart from being split across pages when printing to PDF*/
+    .flowchart {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+}
