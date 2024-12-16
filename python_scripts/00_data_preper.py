@@ -1,10 +1,14 @@
 import datetime
 import logging
 import warnings
+import sys
 from pathlib import Path
 
 import pandas as pd
-from html_table_generator import generate_html_table
+from html_table_generator import generate_html_table, main as get_language
+
+# Get language from command line or user input
+input_language = get_language()
 
 # Set up logging
 logging.basicConfig(
@@ -35,7 +39,7 @@ bbdd.rename(
 )  # Rename column to match the other dataframes
 
 
-# Define the function to read the Fund Excel file and extract the tables
+# Read the Fund data from the Aladdin Data folder
 def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
     # First, read the entire Excel file
     df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=skiprows)
@@ -67,8 +71,8 @@ def read_excel_table(file_path, sheet_name="Sheet1", skiprows=3):
     return df
 
 
-# Define the function to process the Excel file and Convert Sector and Investment tables to HTML
-def process_excel_file(file_path):
+# Process the Excel file  and generate HTML tables
+def process_excel_file(file_path, language):
     logging.info(f"Processing excel fund file from {file_path}")
     # Read the main dataframe and the two tables
     df = read_excel_table(
@@ -85,8 +89,8 @@ def process_excel_file(file_path):
     investment = investment.loc[:, investment.columns != "ISIN"]
 
     # Generate HTML tables without wrapper divs
-    investment_html = generate_html_table(investment, "investment")
-    sector_html = generate_html_table(sector, "sector")
+    investment_html = generate_html_table(investment, "investment", language)
+    sector_html = generate_html_table(sector, "sector", language)
 
     # Add the HTML strings as new columns to the main dataframe
     df["q03_t1"] = investment_html
@@ -96,8 +100,8 @@ def process_excel_file(file_path):
     return df
 
 
-# Define function to process all Excel files in the given folder
-def process_all_excel_files(folder_path):
+# Process all the excel files in the input folder
+def process_all_excel_files(folder_path, language):
     logging.info(f"Processing all Excel files in {folder_path}")
     # Get all Excel files in the specified folder
     excel_files = list(folder_path.glob("*.xlsx"))
@@ -107,7 +111,7 @@ def process_all_excel_files(folder_path):
 
     for file_path in excel_files:
         print(f"Processing file: {file_path}")
-        df = process_excel_file(file_path)
+        df = process_excel_file(file_path, language)
         dfs.append(df)
 
     # Concatenate all DataFrames vertically
@@ -120,7 +124,6 @@ def process_all_excel_files(folder_path):
     return final_df
 
 
-# define function to round all numeric columns to 2 decimal places
 def round_numeric_columns(df):
     # Get all numeric columns
     numeric_columns = df.select_dtypes(include=["float64", "int64"]).columns
@@ -132,16 +135,13 @@ def round_numeric_columns(df):
     return df
 
 
-# Then modify the main processing section to include this rounding step:
-# After getting the result_df but before the column multiplication:
-
 # Process all Excel files and get the final DataFrame
-result_df = process_all_excel_files(aladdin_data_path)
+result_df = process_all_excel_files(aladdin_data_path, input_language)
 
 # Round all numeric values
 result_df = round_numeric_columns(result_df)
 
-logging.info(f"Updateing value of certain columns and generating new columns")
+logging.info(f"Updating value of certain columns and generating new columns")
 # Multiply es_aligned, sust_invest, sust_invest_env,and sust_invest_soc columns by 100
 columns_to_multiply = [
     "{{es_aligned}}",
@@ -164,7 +164,6 @@ for col in aligned_columns:
     )
 
 
-# Let's sort the column order
 def sort_columns(df):
     logging.info("Sorting columns in the final DataFrame.")
     # Define the first columns in the desired order

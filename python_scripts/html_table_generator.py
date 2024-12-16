@@ -1,33 +1,17 @@
 import json
-import os
-from pathlib import Path
 import logging
+import os
+import sys
+from pathlib import Path
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from bs4 import BeautifulSoup
 
 # Set up logging
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
-
-# ask input for language (es, en, pt, or  pl) assign to constant
-try:
-    input_language = input("Enter the language code (es, en, pt, or pl): ")
-    # validete input language is a string and is one of the four languages
-    if not isinstance(input_language, str) or input_language not in [
-        "es",
-        "en",
-        "pt",
-        "pl",
-    ]:
-        raise ValueError(
-            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
-        )
-except ValueError as e:
-    print(e)
-    logging.error(e)
 
 
 def load_translations():
@@ -56,9 +40,7 @@ def translate_text(text, target_language):
     return TRANSLATIONS.get(target_language, {}).get(text, text)
 
 
-def generate_html_table(
-    df, table_structure="investment", target_language=input_language
-):
+def generate_html_table(df, table_structure="investment", target_language=None):
     """
     Generate HTML table without the wrapper div and translate content
 
@@ -70,6 +52,9 @@ def generate_html_table(
     target_language : str
         The target language code for translation
     """
+
+    if target_language is None:
+        target_language = main()
 
     # Remove the first row
     df = df.iloc[1:].copy()
@@ -140,3 +125,26 @@ def generate_html_table(
     """
 
     return new_table
+
+
+def main(language=None):
+    if language is None:
+        if len(sys.argv) > 1:
+            language = sys.argv[1]
+        else:
+            try:
+                language = input("Enter the language code (es, en, pt, or pl): ")
+            except ValueError as e:
+                print(e)
+                logging.error(e)
+
+    if not isinstance(language, str) or language not in ["es", "en", "pt", "pl"]:
+        raise ValueError(
+            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
+        )
+
+    return language
+
+
+if __name__ == "__main__":
+    input_language = main()

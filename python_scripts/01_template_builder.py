@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 import warnings
 
 import pandas as pd
@@ -12,23 +13,26 @@ logging.basicConfig(
     handlers=[logging.FileHandler("template_builder.log"), logging.StreamHandler()],
 )
 
-# add feature ask user for input excel sheet, i.e. language
+# Check if languge code is provided as a command-line argument
+if len(sys.argv) > 1:
+    input_language = sys.argv[1]
+
 # ask input for language (es, en, pt, or  pl) assign to constant
-try:
-    input_language = input("Enter the language code (es, en, pt, or pl): ")
-    # validete input language is a string and is one of the four languages
-    if not isinstance(input_language, str) or input_language not in [
-        "es",
-        "en",
-        "pt",
-        "pl",
-    ]:
-        raise ValueError(
-            "Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'."
-        )
-except ValueError as e:
-    print(e)
-    logging.error(e)
+else:
+    try:
+        input_language = input("Enter the language code (es, en, pt, or pl): ")
+    except ValueError as e:
+        print(e)
+        logging.error(e)
+
+# Validate the input langugage
+if not isinstance(input_language, str) or input_language not in [
+    "es",
+    "en",
+    "pt",
+    "pl",
+]:
+    raise ValueError("Invalid language code. Please enter 'es', 'en', 'pt', or 'pl'.")
 
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
