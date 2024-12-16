@@ -19,8 +19,11 @@ narrative_templates/
 !narrative_templates/*
 narrative_templates/*.html
 
-# ignore excel_books data except narratives_tables
-excel_books/
+# allow the excel_books directory
+!excel_books/
+# ignore all files inside the excel_books directory
+excel_books/*
+# Allow narratives_tables.xlsx
 !excel_books/narratives_tables.xlsx
 
 # ignore txt_files directory
