@@ -564,4 +564,9 @@ td:nth-child(2) { /*add 5px left padding to second column*/
         page-break-inside: avoid;
         break-inside: avoid;
       }
+
+    .q5-checkbox-group {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
 }
