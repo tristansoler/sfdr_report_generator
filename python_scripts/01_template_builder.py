@@ -10,7 +10,10 @@ from bs4 import BeautifulSoup
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("template_builder.log"), logging.StreamHandler()],
+    handlers=[
+        logging.FileHandler("logs/template_builder.log"),
+        logging.StreamHandler(),
+    ],
 )
 
 # Check if languge code is provided as a command-line argument
