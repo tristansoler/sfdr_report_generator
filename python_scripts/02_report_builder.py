@@ -15,7 +15,7 @@ from jinja2 import Environment, FileSystemLoader
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("report_builder.log"), logging.StreamHandler()],
+    handlers=[logging.FileHandler("logs/report_builder.log"), logging.StreamHandler()],
 )
 
 # Suppress the specific warning
@@ -119,6 +119,11 @@ for index, row in df.iterrows():
         "other_nones": row["{{other_nones}}"],
         "ref_period": row["{{ref_period}}"],
         "other_non_sust": row["{{other_non_sust}}"],
+        "total_turnover_enabling": row["total_turnover_enabling"],
+        "total_capex_enabling": row["total_capex_enabling"],
+        "total_opex_enabling": row["total_opex_enabling"],
+        "total_capex_transition": row["total_capex_transition"],
+        "total_opex_transition": row["total_opex_transition"],
     }
 
     # Render the template with the data
