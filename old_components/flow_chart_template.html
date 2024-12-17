@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flowchart with Numbered IDs</title>
+    <link rel="stylesheet" href="flow_chart_style.css"> 
+</head> 
+<body>
+    <div class="flowchart">
+        <svg class="flowchart-lines"></svg>
+        <div class="nodes">
+            <div class="node" id="n10000">Inversiones</div>
+            <div class="branch-horizontal">
+                <div class="node" id="n11000" data-parent="n10000">n.º 1 Ajustadas a características medioambientales o sociales</div>
+                <div class="node" id="n12000" data-parent="n10000">n.º 2 Otras</div>
+            </div>
+            <div class="branch-horizontal">
+                <div class="node" id="n11100" data-parent="n11000">n.º 1A Sostenibles</div>
+                <div class="node" id="n11200" data-parent="n11000">n.º 1B Otras características medioambientales o sociales</div>
+            </div>
+            <div class="sub-branch-horizontal">
+                <div class="node" id="n11110" data-parent="n11100">Otras medioambientales</div>
+                <div class="node" id="n11120" data-parent="n11100">Sociales</div>
+            </div>
+        </div>
+    </div>
+    <script src="flowchart-script.js"></script>
+</body>
+</html>
