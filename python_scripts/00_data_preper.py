@@ -14,7 +14,7 @@ input_language = get_language()
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("data_preper.log"), logging.StreamHandler()],
+    handlers=[logging.FileHandler("logs/data_preper.log"), logging.StreamHandler()],
 )
 # Suppress the specific warning
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
