@@ -137,7 +137,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
                     ha="left",
                     color=colors[j],
                     fontweight="bold",
-                    fontsize=10,
+                    fontsize=14,
                     arrowprops=dict(
                         arrowstyle="-",
                         color=colors[j],
@@ -148,6 +148,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
 
         # Set chart properties
         ax.set_xlim(0, 100)
+        ax.set_xticks(range(0, 101, 25))
         ax.set_xlabel(translate("Percentage", input_language), fontsize=14)
         wrapped_title = "\n".join(wrap(title, width=40))
         ax.set_title(wrapped_title, fontsize=24, wrap=True)
