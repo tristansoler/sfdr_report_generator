@@ -2,7 +2,7 @@
   "es": {
     "Product Name": "Nombre del producto",
     "1. Taxonomy-alignment of investments including sovereign bonds*": "1. Ajuste a la taxonomía de las inversiones, incluidos los bonos soberanos*",
-    "Turnover": "Volumen de \nnegocios",
+    "Turnover": "Volumen \nde \nnegocios",
     "CapEx": "CapEx",
     "OpEx": "OpEx",
     "Taxonomy-aligned: Fossil gas": "Ajustadas a la taxonomía: Gas fósil",
@@ -192,12 +192,12 @@
   "pt": {
     "Product Name": "Nome do Produto",
     "1. Taxonomy-alignment of investments including sovereign bonds*": "1. Investimentos alinhados com a taxonomia, incluindo as obrigações soberanas*",
-    "Turnover": "Volume de \nnegócios",
+    "Turnover": "Volume \nde \nnegócios",
     "CapEx": "CapEx",
     "OpEx": "OpEx",
     "Taxonomy-aligned: Fossil gas": "Alinhado com a taxonomia: gás fóssil",
     "Taxonomy-aligned: Nuclear": "Alinhado com a taxonomia: energia nuclear",
-    "Taxonomy-aligned (no gas and nuclear)": "Alinhados com a taxonomia (excluindo o gás e a energia nuclear)",
+    "Taxonomy-aligned (no gas and nuclear)": "Alinhados com a taxonomia \n(excluindo o gás e a energia nuclear)",
     "Non Taxonomy-aligned": "Não alinhados com a taxonomia",
     "2. Taxonomy-alignment of investments excluding sovereign bonds*": "2. Investimentos alinhados com a taxonomia, excluindo as obrigações soberanas*",
     "This graph represents x_subs% of the total investments.": "Este gráfico representa x_subs% dos investimentos totais.",
