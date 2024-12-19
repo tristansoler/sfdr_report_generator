@@ -150,7 +150,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         ax.set_xlim(0, 100)
         ax.set_xlabel(translate("Percentage", input_language), fontsize=14)
         wrapped_title = "\n".join(wrap(title, width=40))
-        ax.set_title(wrapped_title, fontsize=22, wrap=True)
+        ax.set_title(wrapped_title, fontsize=24, wrap=True)
 
         # Remove spines
         for spine in ax.spines.values():
@@ -159,7 +159,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         # Set y-axis properties
         ax.set_ylim(-0.8, len(categories) - 0.2)
         ax.set_yticks(range(len(categories)))
-        ax.set_yticklabels(categories[::-1], fontsize=14)  # define ylable size here
+        ax.set_yticklabels(categories[::-1], fontsize=22)  # define ylable size here
 
         return ax.get_legend_handles_labels()
 
@@ -171,11 +171,11 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
     line_x = (ax1.get_position().x1 + ax2.get_position().x0) / 2
     line = Line2D(
         [line_x, line_x],
-        [-0.3, 1.3],
+        [-0.15, 1],
         transform=fig.transFigure,
         color="#fae8d4",
         linewidth=2,
-        clip_on=False,  # Added to not allow the line to extend beyond the figure
+        clip_on=True,  # Added to allow the line to extend beyond the figure
     )
     fig.add_artist(line)
 
