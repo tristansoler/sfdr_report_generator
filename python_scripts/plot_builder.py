@@ -53,11 +53,17 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
     data_with_sb = prepare_data(row_data, True)
     data_without_sb = prepare_data(row_data, False)
 
+    # add total investments to the data without sovereign bonds
+    # total investments is  portfolio_mv_exsov in the row data
+    data_without_sb["total_investments"] = row_data["portfolio_mv_exsov"]
+
     # Translate the total investments string
     STRING_TOT_INVESTMENTS = translate(
-        "This graph represents x% of the total investments.", input_language
+        "This graph represents x_subs% of the total investments.", input_language
     )
-    # UPDATED_STRING = STRING_TOT_INVESTMENTS.replace("x", str(data_without_sb["total_investments"][0]))
+    UPDATED_STRING = STRING_TOT_INVESTMENTS.replace(
+        "x_subs", f"{data_without_sb['total_investments'].iloc[0] * 100:.1f}"
+    )
 
     # Function to create a chart
     def create_chart(ax, data, title, input_language=input_language):
@@ -142,9 +148,9 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
 
         # Set chart properties
         ax.set_xlim(0, 100)
-        ax.set_xlabel(translate("Percentage", input_language), fontsize=12)
+        ax.set_xlabel(translate("Percentage", input_language), fontsize=14)
         wrapped_title = "\n".join(wrap(title, width=40))
-        ax.set_title(wrapped_title, fontsize=14, wrap=True)
+        ax.set_title(wrapped_title, fontsize=22, wrap=True)
 
         # Remove spines
         for spine in ax.spines.values():
@@ -153,22 +159,23 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         # Set y-axis properties
         ax.set_ylim(-0.8, len(categories) - 0.2)
         ax.set_yticks(range(len(categories)))
-        ax.set_yticklabels(categories[::-1])
+        ax.set_yticklabels(categories[::-1], fontsize=14)  # define ylable size here
 
         return ax.get_legend_handles_labels()
 
     # Create the figure with two subplots / edit plot size here
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(22, 8))
 
     # Add a vertical line between the subplots
-    fig.subplots_adjust(wspace=0.4)  # Adjust space between subplots if necessary
+    fig.subplots_adjust(wspace=0.5)  # Adjust space between subplots if necessary
     line_x = (ax1.get_position().x1 + ax2.get_position().x0) / 2
     line = Line2D(
         [line_x, line_x],
-        [0, 1],
+        [-0.3, 1.3],
         transform=fig.transFigure,
         color="#fae8d4",
         linewidth=2,
+        clip_on=False,  # Added to not allow the line to extend beyond the figure
     )
     fig.add_artist(line)
 
@@ -195,22 +202,33 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         handles1,
         labels1,
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.08),  # Moved up from -0.15
-        ncol=2,
-        fontsize=10,
+        bbox_to_anchor=(0.5, -0.15),  # Moved up from -0.15
+        ncol=1,
+        fontsize=22,
+        frameon=False,
+        columnspacing=1,  # Add spacing between columns
+        handletextpad=0.5,  # Reduce space between handle and text
     )  # Create separate legends for each subplot
     ax2.legend(
         handles2,
         labels2,
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.08),  # Moved up from -0.15
-        ncol=2,
-        fontsize=12,  # Increased from 10
+        bbox_to_anchor=(0.5, -0.15),  # Moved up from -0.15
+        ncol=1,
+        fontsize=22,
+        frameon=False,
+        columnspacing=1,  # Add spacing between columns
+        handletextpad=0.5,  # Reduce space between handle and text
+    )
+
+    # Add the UPDATED_STRING below the legend of ax2
+    fig.text(
+        0.75, -0.15, UPDATED_STRING, ha="center", va="bottom", fontsize=22, wrap=True
     )
 
     # Adjust layout and spacing
     plt.tight_layout()
-    plt.subplots_adjust(bottom=0.2, wspace=0.3)  # Adjusted from 0.25 to 0.2
+    plt.subplots_adjust(bottom=0.3, wspace=0.5)  # Adjusted from 0.3 to 0.2
 
     # Save the plot
     plot_filename = f"plot_{report_id}.png"

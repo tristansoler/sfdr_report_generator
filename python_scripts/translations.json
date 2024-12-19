@@ -10,7 +10,7 @@
     "Taxonomy-aligned (no gas and nuclear)": "Ajustadas a la taxonomía (ni gas fósil ni energía nuclear)",
     "Non Taxonomy-aligned": "No ajustadas a la taxonomía",
     "2. Taxonomy-alignment of investments excluding sovereign bonds*": "2. Ajuste a la taxonomía de las inversiones, excluidos los bonos soberanos*",
-    "This graph represents x% of the total investments.": "Este gráfico representa el x % de las inversiones totales.",
+    "This graph represents x_subs% of the total investments.": "Este gráfico representa el x_subs% de las inversiones totales.",
     "Percentage": "Porcentaje",
 
     "Largest Investments": "Inversiones más importantes",
@@ -200,7 +200,7 @@
     "Taxonomy-aligned (no gas and nuclear)": "Alinhados com a taxonomia (excluindo o gás e a energia nuclear)",
     "Non Taxonomy-aligned": "Não alinhados com a taxonomia",
     "2. Taxonomy-alignment of investments excluding sovereign bonds*": "2. Investimentos alinhados com a taxonomia, excluindo as obrigações soberanas*",
-    "This graph represents x% of the total investments.": "Este gráfico representa x % dos investimentos totais.",
+    "This graph represents x_subs% of the total investments.": "Este gráfico representa x_subs% dos investimentos totais.",
     "Percentage": "Percentagem",
 
     "Largest Investments": "Maiores Investimentos",
@@ -396,7 +396,7 @@
     "Taxonomy-aligned (no gas and nuclear)": "Zgodne z systematyką (inne niż gaz i energia jądrowa)",
     "Non Taxonomy-aligned": "Niezgodne z systematyką",
     "2. Taxonomy-alignment of investments excluding sovereign bonds*": "2. Zgodność inwestycji z systematyką (z wyjątkiem obligacji skarbowych*)",
-    "This graph represents x% of the total investments.": "Ten wykres przedstawia x% inwestycji ogółem.",
+    "This graph represents x_subs% of the total investments.": "Ten wykres przedstawia x_subs% inwestycji ogółem.",
     "Percentage": "Procent",
 
     "Largest Investments": "Największe Inwestycje",
