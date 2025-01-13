@@ -156,6 +156,9 @@ def process_sectorial_distribution(files: List[str]) -> pd.DataFrame:
     result_df.columns = ["Sectors", "% Assets"]
     result_df.set_index("Sectors", inplace=True)
 
+    # Sort by percentage in descending order
+    result_df = result_df.sort_values("% Assets", ascending=False)
+
     # Format percentages with high precision
     result_df["% Assets"] = result_df["% Assets"].map("{:.9%}".format)
 
