@@ -165,7 +165,7 @@ def process_sectorial_distribution(files: List[str]) -> pd.DataFrame:
     result_df = result_df.sort_values("% Assets", ascending=False)
 
     # Format percentages with high precision
-    result_df["% Assets"] = result_df["% Assets"].map("{:.9%}".format)
+    result_df["% Assets"] = result_df["% Assets"].map("{:.1%}".format)
 
     return result_df
 
@@ -267,7 +267,7 @@ def process_top_investments(files: List[str]) -> pd.DataFrame:
     result_df = result_df.sort_values("% Assets", ascending=False)
 
     # Format percentages with high precision
-    result_df["% Assets"] = result_df["% Assets"].map("{:.9%}".format)
+    result_df["% Assets"] = result_df["% Assets"].map("{:.1%}".format)
 
     # return only first 15 rows
     result_df = result_df.head(15)
@@ -338,6 +338,7 @@ def main():
         for prefix, files in file_groups.items():
             logging.info(f"Processing group with prefix: {prefix}")
 
+            prefix = prefix.strip()  # Remove any leading/trailing spaces
             # Process each sheet type
             post_contractual, sectorial, top_investments = process_group(files)
 
