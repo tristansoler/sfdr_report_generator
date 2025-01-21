@@ -208,6 +208,10 @@ df = df.loc[
     (df["narrative"] == "sostenible_fi_eq")
     | (df["narrative"] == "sostenible_fi")
     | (df["narrative"] == "art8_spshares_10")
+    | (df["narrative"] == "art8_feeder_noprev_pt")
+    | (df["narrative"] == "art8_fi_pt")
+    | (df["narrative"] == "art8_10_fi_pt")
+    | (df["narrative"] == "art8_fp_pt")
 ]
 
 # Process each row of the filtered DataFrame
