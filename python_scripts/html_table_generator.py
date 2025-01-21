@@ -56,9 +56,6 @@ def generate_html_table(df, table_structure="investment", target_language=None):
     if target_language is None:
         target_language = main()
 
-    # Remove the first row
-    df = df.iloc[1:].copy()
-
     # Format percentage values
     def process_percentage(value):
         if pd.isna(value):
@@ -71,9 +68,8 @@ def generate_html_table(df, table_structure="investment", target_language=None):
     # Apply this function to your percentage columns
     for col in df.select_dtypes(include=["float64"]).columns:
         df[col] = df[col].apply(process_percentage)
-
-    # Then, when formatting for display
-    df[col] = df[col].apply(lambda x: f"{x:.2%}" if pd.notnull(x) else "")
+        # Then, when formatting for display
+        df[col] = df[col].apply(lambda x: f"{x:.2%}" if pd.notnull(x) else "")
 
     # Translate column names
     df.columns = [translate_text(col, target_language) for col in df.columns]
