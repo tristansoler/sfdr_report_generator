@@ -111,6 +111,7 @@ for index, row in df.iterrows():
         "product_name": row["{{product_name}}"],
         "lei_code": row["{{lei_code}}"],
         "sust_invest": row["{{sust_invest}}"],
+        "esg_score_2022": row["{{esg_score_2022}}"],
         "esg_score_2023": row["{{esg_score_2023}}"],
         "esg_score_2024": row["{{esg_score_2024}}"],
         "es_aligned": row["{{es_aligned}}"],
@@ -119,10 +120,14 @@ for index, row in df.iterrows():
         "other_nones": row["{{other_nones}}"],
         "ref_period": row["{{ref_period}}"],
         "other_non_sust": row["{{other_non_sust}}"],
+        "taxonomy_2022": row["{{taxonomy_2022}}"],
+        "taxonomy_2023": row["{{taxonomy_2023}}"],
         "total_turnover_enabling": row["total_turnover_enabling"],
+        "total_turnover_transition": row["total_turnover_transition"],
+        "total_turnover_aligned": row["total_turnover_aligned"],
         "total_capex_enabling": row["total_capex_enabling"],
-        "total_opex_enabling": row["total_opex_enabling"],
         "total_capex_transition": row["total_capex_transition"],
+        "total_opex_enabling": row["total_opex_enabling"],
         "total_opex_transition": row["total_opex_transition"],
     }
 
