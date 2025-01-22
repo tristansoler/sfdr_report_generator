@@ -144,6 +144,7 @@ else:
         "q03",
         "gb005_q03",
         "q03_a1",
+        "q03_a2",
         "q03_t1",
         "q04",
         "q04_a",
@@ -207,6 +208,7 @@ else:
 df = df.loc[
     (df["narrative"] == "sostenible_fi_eq")
     | (df["narrative"] == "sostenible_fi")
+    | (df["narrative"] == "sostenible_fi_pt")
     | (df["narrative"] == "art8_spshares_10")
     | (df["narrative"] == "art8_feeder_noprev_pt")
     | (df["narrative"] == "art8_fi_pt")
