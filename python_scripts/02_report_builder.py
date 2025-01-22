@@ -106,6 +106,9 @@ for index, row in df.iterrows():
         row, plots_dir, index, translations, input_language
     )
 
+    # Replace NaN in specific columns with an empty string for rendering
+    row = row.replace({np.nan: ""})
+
     # Prepare data for the template
     data = {
         "product_name": row["{{product_name}}"],
