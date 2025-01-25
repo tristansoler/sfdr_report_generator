@@ -120,7 +120,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
                             ha="center",
                             color="white",
                             fontweight="bold",
-                            fontsize=10,
+                            fontsize=15,  # it was 10 and I changed it to 15
                         )
 
                 cumulative += width
