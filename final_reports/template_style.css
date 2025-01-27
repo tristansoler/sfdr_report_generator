@@ -401,6 +401,22 @@ td:nth-child(2) { /*add 5px left padding to second column*/
 .country {
     text-align: center;
 }
+
+/* Question 2 Table Styles for Portugal Reports*/
+#q02_t1 .col2 {
+    width: 20%;
+}
+#q02_t1 .col3 {
+    width: 32%; /* Adjust this width as needed */
+    text-align: left; /* Align text to the left */
+    word-break: break-word; /* Ensure long words break properly to prevent overflowing */
+    padding-right: 10px; /* Add padding to the left */
+} 
+#q02_t1 .col4 {
+    width: 18%; /* Adjust this width as needed */
+    text-align: right; /* Align text to the right */
+    padding-left: 10px;
+}
 /* FLOW CHART STYLES */
 .flowchart {
     position: relative;
