@@ -4,6 +4,7 @@ import os
 import sys
 from pathlib import Path
 import re
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -13,6 +14,9 @@ from bs4 import BeautifulSoup
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
 )
+
+# get DATE in format YYYYMMDD
+DATE = datetime.now().strftime("%Y%m%d")
 
 
 # define function to create dict that maps report names to report codes
@@ -42,11 +46,20 @@ def get_mapping():
 
 # Format percentage values
 def process_percentage(value):
-    if pd.isna(value):
+    if pd.isna(value):  # Handle NaN or None
         return np.nan
     try:
-        return float(value.strip("%")) / 100
-    except AttributeError:
+        # Ensure the value is treated as a string
+        value_str = str(value).strip("%")
+        numeric_value = float(value_str)
+
+        # Return as integer if the value is exactly zero
+        if numeric_value == 0.0:
+            return int(numeric_value)
+        else:
+            return numeric_value
+
+    except ValueError:  # Catch conversion errors (e.g., invalid strings)
         return value
 
 
@@ -55,23 +68,35 @@ def generate_html_table(excel_path: str):
 
     try:
         df = pd.read_excel(excel_path, engine="openpyxl")
+        # replace "-" with "" in df["Unidades de medida"]
+        df["Unidades de medida"] = (
+            df["Unidades de medida"].str.strip().str.replace("-", "")
+        )
+        # drop rows with NaN in 'Métrica' column
+        df = df.dropna(subset=["Métrica"])
+        # value
         # format column "Métrica" to have only two decimal places using f-string
-        df["Métrica"] = df["Métrica"].apply(lambda x: f"{x:.2f}")
+        df["Métrica"] = df["Métrica"].apply(lambda x: f"{x:.1f}")
         # format column "% Cobertura" with process_percentage function
         df["% Cobertura"] = (
-            df["% Cobertura"].apply(process_percentage).apply(lambda x: f"{x:.2f}%")
+            df["% Cobertura"]
+            .apply(process_percentage)
+            .apply(lambda x: "0%" if float(x) == 0 else f"{x*100:.2f}%")
         )
-        # format column "Unidades de medida" to have a line break after the slash
-        df["Unidades de medida"] = (
-            df["Unidades de medida"].str.strip().str.replace("/ ", "/<br>", regex=False)
-        )
+        # create new column "Métrica" with the values of the column "Métrica" and "Unidades de medida"
+        df["Métrica"] = df["Métrica"] + " " + df["Unidades de medida"]
+        df["Métrica"] = df["Métrica"].str.replace(" %", "%")
+
+        df_filtered = df[["Indicadores", "Métrica", "% Cobertura"]].copy()
+        # rename "% Cobertura" column to "Cobertura"
+        df_filtered.rename(columns={"% Cobertura": "Cobertura"}, inplace=True)
 
         if df.empty:
             logging.warning(f"Excel file is empty: {excel_path}")
             return ""
 
         # Generate the initial HTML table
-        html_str = df.to_html(classes="dataframe", index=False, escape=False)
+        html_str = df_filtered.to_html(classes="dataframe", index=False, escape=False)
 
         # Parse the HTML using BeautifulSoup
         soup = BeautifulSoup(html_str, "html.parser")
@@ -82,7 +107,6 @@ def generate_html_table(excel_path: str):
                       <col class="col1" />
                       <col class="col2" /> 
                       <col class="col3" /> 
-                      <col class="col4" />
                     </colgroup>
             """
         # Create the table structure without the wrapper div
@@ -91,7 +115,7 @@ def generate_html_table(excel_path: str):
                 {colgroup}
                 <thead>
                     <tr>
-                        {"".join(f"<th>{col}</th>" for col in df.columns)}
+                        {"".join(f"<th>{col}</th>" for col in df_filtered.columns)}
                     </tr>
                 </thead>
                 {str(soup.find("tbody"))}
@@ -145,7 +169,7 @@ def insert_html_table(html_path: str, html_table: str):
 def extract_report_name(file_path):
     """Extracts the report name from a given file path using regex."""
     file_name = file_path.name  # Get the file name
-    match = re.match(r"20250127_(.+?)_pt\.html", file_name)
+    match = re.match(rf"{DATE}_(.+?)_pt\.html", file_name)
     if match:
         report_name = match.group(1)  # Extract the content inside the parentheses
         logging.debug(f"Extracted report name: {report_name}")
