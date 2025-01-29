@@ -18,11 +18,24 @@ def convert_decimal_format(file_path):
     # Specific pattern for exactly "0.0"
     pattern_zero = r"\b0\.0\b"
 
+    # Pattern to remove space before "%"
+    pattern_space_percent = r"(\d+)\s+%"
+
+    # Pattern to remove space between "</span>" and "%"
+    pattern_span_percent = r"(</span>)\s+%"
+
     # Replace decimal points with commas
-    updated_content = re.sub(
-        pattern_general, r"\1,\2\3 \4", content
-    )  # Fix: Correct group reference
+    updated_content = re.sub(pattern_general, r"\1,\2\3 \4", content)
     updated_content = re.sub(pattern_zero, "0,0", updated_content)
+
+    # Remove space before "%"
+    updated_content = re.sub(pattern_space_percent, r"\1%", updated_content)
+
+    # Remove space between "</span>" and "%"
+    updated_content = re.sub(pattern_span_percent, r"\1%", updated_content)
+
+    # change sociall for social
+    updated_content = updated_content.replace("sociall", "social")
 
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(updated_content)
