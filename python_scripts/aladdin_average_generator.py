@@ -204,22 +204,12 @@ def process_top_investments(files: List[str]) -> pd.DataFrame:
                 / 100.0
             )
 
-            # Remove any rows where essential data is missing
-            df = df.dropna(subset=["ISIN", "% Assets", "Largest Investments"])
+            # swap nan for "cash" in column ISIN and "others" in column Sector
+            df["ISIN"] = df["ISIN"].fillna("Cash")
+            df["Sector"] = df["Sector"].fillna("Others")
 
-            # Group by ISIN and take the first occurrence of other fields
-            df = (
-                df.groupby("ISIN")
-                .agg(
-                    {
-                        "Largest Investments": "first",
-                        "Sector": "first",
-                        "% Assets": "sum",  # Sum in case of duplicates
-                        "Country Name": "first",
-                    }
-                )
-                .reset_index()
-            )
+            # Remove any rows where essential data is missing
+            df = df.dropna(subset=["Largest Investments"])
 
             df_list.append(df)
 
@@ -247,30 +237,17 @@ def process_top_investments(files: List[str]) -> pd.DataFrame:
     )
 
     # Normalize percentages to ensure they sum to 100%
-    total = result_df["% Assets"].sum()
-    result_df["% Assets"] = result_df["% Assets"] / total
-
-    # Now group by Largest Investments
-    result_df = (
-        result_df.groupby("Largest Investments")
-        .agg(
-            {
-                "Sector": "first",
-                "% Assets": "sum",  # Sum the percentages for same investments
-                "Country Name": "first",
-            }
-        )
-        .reset_index()
-    )
+    # total = result_df["% Assets"].sum()
+    # result_df["% Assets"] = result_df["% Assets"] / total
 
     # Sort by percentage in descending order
     result_df = result_df.sort_values("% Assets", ascending=False)
 
     # Format percentages with high precision
-    result_df["% Assets"] = result_df["% Assets"].map("{:.1%}".format)
+    result_df["% Assets"] = result_df["% Assets"].map("{:.9%}".format)
 
     # return only first 15 rows
-    result_df = result_df.head(15)
+    # result_df = result_df.head(15)
 
     return result_df
 
