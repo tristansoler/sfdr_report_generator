@@ -38,13 +38,13 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
                 "gas": row[f"total_capex_gas{suffix}"],
                 "nuclear": row[f"total_capex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_capex_nogasnonuclear{suffix}"],
-                "rest": row[f"rest_opex_aligned{suffix}"],
+                "rest": row[f"rest_capex_aligned{suffix}"],
             },
             "OpEx": {
                 "gas": row[f"total_opex_gas{suffix}"],
                 "nuclear": row[f"total_opex_nuclear{suffix}"],
                 "nogasnonuclear": row[f"total_opex_nogasnonuclear{suffix}"],
-                "rest": row[f"rest_capex_aligned{suffix}"],
+                "rest": row[f"rest_opex_aligned{suffix}"],
             },
         }
         return pd.DataFrame(data)
@@ -160,7 +160,7 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
         # Set y-axis properties
         ax.set_ylim(-0.8, len(categories) - 0.2)
         ax.set_yticks(range(len(categories)))
-        ax.set_yticklabels(categories[::-1], fontsize=22)  # define ylable size here
+        ax.set_yticklabels(categories, fontsize=22)  # define ylable size here
 
         return ax.get_legend_handles_labels()
 
