@@ -68,9 +68,9 @@ def build_plot(row_data, output_dir, report_id, translations, input_language):
     # Function to create a chart
     def create_chart(ax, data, title, input_language=input_language):
         categories = [
-            translate("Turnover", input_language),
-            "CapEx",
             "OpEx",
+            "CapEx",
+            translate("Turnover", input_language),
         ]
         columns = ["gas", "nuclear", "nogasnonuclear", "rest"]
         colors = [
