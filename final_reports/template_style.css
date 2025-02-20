@@ -19,7 +19,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    padding-left: 140pt;
+    padding-left: 150pt; /* Adjusted padding from 140pt to 150pt */
     padding-right: 40pt;
     padding-top: 20px;
 }
@@ -486,14 +486,14 @@ td:nth-child(2) { /*add 5px left padding to second column*/
     color: white;
 }
 .flowchart #n11200 {
-    background-color: #8cb88c;
+    background-color: #6495ed;
 }
 /* Styling for Level 3 */
 .flowchart #n11110 {
     background-color: #028d02;
 }
 .flowchart #n11120 {
-    background-color: #6495ed;
+    background-color: #8cb88c;
 }
 /*STYLES FOR CHECKBOX QUESTION 5*/
 .q5-checkbox-group {
