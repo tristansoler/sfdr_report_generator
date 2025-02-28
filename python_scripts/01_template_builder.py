@@ -205,16 +205,22 @@ else:
     ]
 
 # Filter the df and select the rows with the narrative == sostenible_fi_eq & narrative == sostenible_fi
-df = df.loc[
-    (df["narrative"] == "sostenible_fi_eq")
-    | (df["narrative"] == "sostenible_fi")
-    | (df["narrative"] == "sostenible_fi_pt")
-    | (df["narrative"] == "art8_spshares_10")
-    | (df["narrative"] == "art8_feeder_noprev_pt")
-    | (df["narrative"] == "art8_fi_pt")
-    | (df["narrative"] == "art8_10_fi_pt")
-    | (df["narrative"] == "art8_fp_pt")
-]
+# df = df.loc[
+#    (df["narrative"] == "sostenible_fi_eq")
+#    | (df["narrative"] == "sostenible_fi")
+#    | (df["narrative"] == "sostenible_fi_pt")
+#    | (df["narrative"] == "art8_spshares_10")
+#    | (df["narrative"] == "art8_feeder_noprev_pt")
+#    | (df["narrative"] == "art8_fi_pt")
+#    | (df["narrative"] == "art8_10_fi_pt")
+#    | (df["narrative"] == "art8_fp_pt")
+#    | (df["narrative"] == "art8_feeder_pol_euroequity")
+#    | (df["narrative"] == "art8_robeco_pol")
+#    | (df["narrative"] == "art9_prosperity_feeder_pol")
+#    | (df["narrative"] == "art8_feeder_pol_futurewealth")
+#    | (df["narrative"] == "art8_fi_noprev_pol")
+# ]
+
 
 # Process each row of the filtered DataFrame
 for index, row in df.iterrows():
