@@ -25,6 +25,7 @@ narrative_templates/*.html
 excel_books/*
 # Allow narratives_tables.xlsx
 !excel_books/narratives_tables.xlsx
+!excel_books/20250226_overrides_backfiller.csv
 
 # ignore txt_files directory
 txt_files/
