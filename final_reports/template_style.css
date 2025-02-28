@@ -277,6 +277,7 @@ body {
     font-style: italic;
     margin-top: 20pt; /* increased 5pt from 15pt */
     margin-bottom: 15pt; /* increased 5pt from 10pt */
+    margin-left: 1cm;
     padding-right: 40pt;
     box-sizing: border-box;
     word-wrap: break-word;
@@ -553,6 +554,13 @@ td:nth-child(2) { /*add 5px left padding to second column*/
 .q5-checkbox-group,
 .footnote-container {
     page-break-inside: avoid;
+}
+
+/*Custom styles for some elements*/
+
+#q01sq04sq01_a, 
+#q01sq04sq02_a {
+    margin-left: 1cm;
 }
 
 /* Print styles */
