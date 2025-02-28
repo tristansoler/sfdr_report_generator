@@ -83,6 +83,10 @@ def generate_html_table(df, table_structure="investment", target_language=None):
                 )
             )
 
+    # drop column "ISIN" if it exists
+    if "ISIN" in df.columns:
+        df.drop(columns=["ISIN"], inplace=True)
+
     # Generate the initial HTML table
     html_str = df.to_html(classes="dataframe", index=False, escape=False)
 
