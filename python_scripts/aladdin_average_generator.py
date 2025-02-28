@@ -33,7 +33,7 @@ def group_files(input_folder: str) -> Dict[str, List[str]]:
     all_files = [file for file in os.listdir(input_folder) if file.endswith(".xlsx")]
     file_groups = {}  # created dictionary to store the grouped files
     for file in all_files:
-        prefix = file[:9]  # Extract the first 9 characters
+        prefix = file[:10]  # Extract the first 9 characters | 10 for Polish files
         if prefix not in file_groups:
             file_groups[prefix] = []  # keys are first 9-char & vals are list of files
         file_groups[prefix].append(os.path.join(input_folder, file))
@@ -197,11 +197,8 @@ def process_top_investments(files: List[str]) -> pd.DataFrame:
             ]
 
             # Convert percentage strings to numeric values with high precision
-            df["% Assets"] = (
-                pd.to_numeric(
-                    df["% Assets"].astype(str).str.rstrip("%"), errors="coerce"
-                )
-                / 100.0
+            df["% Assets"] = pd.to_numeric(
+                df["% Assets"].astype(str).str.rstrip("%"), errors="coerce"
             )
 
             # swap nan for "cash" in column ISIN and "others" in column Sector
@@ -244,10 +241,10 @@ def process_top_investments(files: List[str]) -> pd.DataFrame:
     result_df = result_df.sort_values("% Assets", ascending=False)
 
     # Format percentages with high precision
-    result_df["% Assets"] = result_df["% Assets"].map("{:.9%}".format)
+    result_df["% Assets"] = result_df["% Assets"].map("{:.2%}".format)
 
     # return only first 15 rows
-    # result_df = result_df.head(15)
+    result_df = result_df.head(15)
 
     return result_df
 
